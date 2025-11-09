@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Guide: The Tyger & The Lamb by William Blake</title>
+    <style>
+        /* CSS RESET & FONT */
+        @import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400&family=Roboto:wght@400;500;700&display=swap');
+
+        :root {
+            --dark-blue-gray: #1b262c;
+            --mid-blue: #0f4c75;
+            --bright-blue: #3282b8;
+            --light-blue: #bbe1fa;
+            --bg-color: #f9fcff;
+            --card-shadow: 0 10px 30px rgba(0, 76, 117, 0.1);
+            --border-radius: 16px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--dark-blue-gray);
+            line-height: 1.7;
+            font-size: 16px;
+        }
+
+        /* GENERAL STYLES */
+        h1, h2, h3, h4 {
+            font-family: 'Merriweather', serif;
+            color: var(--mid-blue);
+            line-height: 1.3;
+        }
+
+        h1 { font-size: 3.5rem; }
+        h2 { font-size: 2.5rem; margin-bottom: 1.5rem; border-bottom: 2px solid var(--light-blue); padding-bottom: 0.5rem; }
+        h3 { font-size: 1.5rem; color: var(--bright-blue); margin-bottom: 1rem; }
+        h4 { font-size: 1.2rem; color: var(--mid-blue); margin-bottom: 0.5rem; }
+
+        main {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        section {
+            margin-bottom: 3rem;
+        }
+
+        /* CARD COMPONENT */
+        .card {
+            background-color: #ffffff;
+            border-radius: var(--border-radius);
+            box-shadow: var(--card-shadow);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* HERO SECTION */
+        .hero-section {
+            text-align: center;
+            padding: 5rem 1.5rem;
+            border-radius: var(--border-radius);
+            margin-bottom: 3rem;
+            background: linear-gradient(135deg, #e0f7fa, #bbe1fa);
+        }
+        .hero-section h1 {
+            color: var(--dark-blue-gray);
+        }
+        .hero-section .poet-name {
+            font-size: 1.5rem;
+            color: var(--mid-blue);
+            margin-top: 0.5rem;
+        }
+        .hero-section .hook {
+            font-size: 1.1rem;
+            color: var(--bright-blue);
+            margin-top: 1rem;
+            font-style: italic;
+        }
+
+        /* HINDI TOGGLE & PANEL */
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-header h3 {
+            margin-bottom: 0;
+        }
+
+        .hindi-toggle-btn {
+            background-color: var(--bright-blue);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .hindi-toggle-btn:hover {
+            background-color: var(--mid-blue);
+        }
+
+        .hindi-panel {
+            background-color: #f0f8ff;
+            border-left: 4px solid var(--bright-blue);
+            padding: 1rem;
+            margin-top: 1rem;
+            border-radius: 8px;
+            font-family: 'Noto Sans Devanagari', sans-serif; /* Assumes user has a Hindi font */
+            display: none; /* Initially hidden */
+        }
+        .hindi-panel.visible {
+            display: block;
+        }
+
+        /* POEM ANALYSIS SECTION */
+        .poem-analysis-container {
+            margin-top: 2rem;
+        }
+        .stanza-block {
+            margin-bottom: 2rem;
+        }
+        .poem-text-box {
+            background-color: #f0f9ff;
+            border: 1px solid var(--light-blue);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            font-family: 'Merriweather', serif;
+            font-size: 1.1rem;
+            line-height: 2.2;
+            white-space: pre-wrap;
+            position: relative;
+        }
+        .poem-text-box .hindi-toggle-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+        .analysis-box {
+            border: 1px solid #e0e0e0;
+            border-top: none;
+            padding: 1.5rem;
+            border-radius: 0 0 var(--border-radius) var(--border-radius);
+            background-color: #fff;
+        }
+        .analysis-box > div {
+            margin-bottom: 1.5rem;
+        }
+        .analysis-box > div:last-child {
+            margin-bottom: 0;
+        }
+        .analysis-box ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .analysis-box li {
+            margin-bottom: 0.5rem;
+        }
+        .analysis-box b {
+            color: var(--mid-blue);
+        }
+
+        /* PROSODY HELP COLLAPSIBLE */
+        .scansion-help summary {
+            cursor: pointer;
+            color: var(--bright-blue);
+            font-weight: 500;
+        }
+        .scansion-help div {
+            padding: 1rem;
+            margin-top: 0.5rem;
+            background: #f0f8ff;
+            border-radius: 8px;
+        }
+        
+        /* QUIZ CARD */
+        .quiz-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+        .quiz-question {
+            border: 1px solid var(--light-blue);
+            padding: 1rem;
+            border-radius: 8px;
+        }
+        .quiz-question p {
+            margin-bottom: 0.5rem;
+        }
+        .quiz-question ul {
+            list-style: none;
+        }
+        .quiz-question li {
+            padding: 0.25rem 0;
+        }
+        .quiz-question input[type="text"] {
+            border: none;
+            border-bottom: 1px solid var(--dark-blue-gray);
+            background: transparent;
+            font-size: 1rem;
+            font-family: 'Roboto', sans-serif;
+            width: 150px;
+        }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 2rem 1rem;
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            color: var(--mid-blue);
+            border-top: 1px solid var(--light-blue);
+        }
+
+        /* RESPONSIVENESS */
+        @media (max-width: 768px) {
+            body { font-size: 15px; }
+            h1 { font-size: 2.5rem; }
+            h2 { font-size: 2rem; }
+            main { padding: 10px; }
+            .hero-section { padding: 3rem 1rem; }
+            .card { padding: 1.5rem; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <main>
+        <header class="hero-section">
+            <h1>The Tyger & The Lamb</h1>
+            <p class="poet-name">by William Blake</p>
+            <p class="hook">A study of innocence and experience, the gentle and the terrifying.</p>
+        </header>
+
+        <article class="card">
+            <div class="card-header">
+                <h3>The Poet: William Blake (1757-1827)</h3>
+                <button class="hindi-toggle-btn" aria-expanded="false" aria-controls="poet-hindi">हिं</button>
+            </div>
+            <p>William Blake was an English poet, painter, and printmaker. Largely unrecognised during his lifetime, Blake is now considered a seminal figure in the history of the poetry and visual arts of the Romantic Age. He lived in London his entire life (except for three years in Felpham) and held strong, often radical views on religion, society, and politics.</p>
+            <p><strong>Core Preoccupations:</strong> Blake was deeply spiritual but hostile to organised religion. He explored the "two contrary states of the human soul" through his collections <em>Songs of Innocence</em> (1789) and <em>Songs of Experience</em> (1794), where "The Lamb" and "The Tyger" appear, respectively. He valued imagination above reason and believed in a personal, mystical connection to the divine.</p>
+            <div id="poet-hindi" class="hindi-panel">
+                <p>विलियम ब्लेक एक अंग्रेज़ कवि, चित्रकार और प्रिंट बनाने वाले कलाकार थे। 🎨 अपने जीवनकाल में उन्हें ज़्यादा पहचान नहीं मिली, लेकिन आज उन्हें रोमांटिक युग के एक बहुत बड़े और महत्वपूर्ण कलाकार के रूप में जाना जाता है।</p>
+                <p>ब्लेक की ख़ास बातें ये थीं कि वे बहुत आध्यात्मिक थे, पर चर्च जैसे संगठित धर्मों को पसंद नहीं करते थे। उन्होंने अपनी कविताओं के संग्रह 'सॉन्ग्स ऑफ़ इनोसेंस' (मासूमियत के गीत) और 'सॉन्ग्स ऑफ़ एक्सपीरियंस' (अनुभव के गीत) के ज़रिए इंसान की आत्मा की दो विपरीत अवस्थाओं को दिखाया। "द लैम्ब" पहली किताब से है और "द टाइगर" दूसरी से। वो तर्क से ज़्यादा कल्पना को महत्व देते थे और मानते थे कि हर इंसान ईश्वर से सीधे जुड़ सकता है। ✨</p>
+            </div>
+        </article>
+        
+        <article class="card">
+            <div class="card-header">
+                <h3>The Literary Period: Romanticism (c. 1785–1832)</h3>
+                <button class="hindi-toggle-btn" aria-expanded="false" aria-controls="period-hindi">हिं</button>
+            </div>
+            <p>Blake was a key early figure in the Romantic movement, which was a reaction against the Enlightenment's focus on logic and reason. Romantics championed emotion, individualism, and the beauty and power of the natural world.</p>
+            <p><strong>Main Features of Romanticism found in these poems:</strong></p>
+            <ul>
+                <li><strong>Emotion over Reason:</strong> The poems are driven by feelings of wonder, tenderness ("The Lamb"), and awe-filled terror ("The Tyger").</li>
+                <li><strong>The Sublime:</strong> "The Tyger" perfectly captures the sublime – an experience of nature that is both terrifying and beautiful, overwhelming the mind.</li>
+                <li><strong>Imagination:</strong> Blake uses powerful, imaginative visions (a tiger "burning bright," a divine blacksmith) to explore profound questions.</li>
+                <li><strong>Spirituality & Mysticism:</strong> Both poems grapple with the nature of God and creation, not through doctrine, but through personal, mystical questioning.</li>
+            </ul>
+            <div id="period-hindi" class="hindi-panel">
+                <p>विलियम ब्लेक रोमांटिक आंदोलन के एक प्रमुख शुरुआती व्यक्ति थे। यह आंदोलन ज्ञानोदय (Enlightenment) की तर्क-वितर्क वाली सोच के खिलाफ़ एक प्रतिक्रिया थी। रोमांटिक कवि तर्क से ज़्यादा भावनाओं, व्यक्ति की आज़ादी, और प्रकृति की सुंदरता और शक्ति को महत्व देते थे। 🌳❤️</p>
+                <p><strong>इस आंदोलन की मुख्य बातें जो इन कविताओं में दिखती हैं:</strong></p>
+                <ul>
+                    <li><strong>भावनाओं को प्राथमिकता:</strong> कविताएँ कोमल आश्चर्य ("द लैम्ब") और भयानक विस्मय ("द टाइगर") जैसी भावनाओं से भरी हैं।</li>
+                    <li><strong>प्रकृति का विराट और भयानक रूप (Sublime):</strong> "द टाइगर" प्रकृति के उस रूप को दिखाता है जो एक ही समय में डरावना और सुंदर हो, और जो मन पर छा जाए।</li>
+                    <li><strong>कल्पना की शक्ति:</strong> ब्लेक गहरी बातों को समझाने के लिए शक्तिशाली कल्पना का उपयोग करते हैं, जैसे "जलता हुआ बाघ" या एक "दैवीय लोहार"।</li>
+                    <li><strong>अध्यात्म:</strong> दोनों कविताएँ ईश्वर और सृष्टि के स्वभाव पर सवाल उठाती हैं, लेकिन किसी धार्मिक किताब के ज़रिए नहीं, बल्कि व्यक्तिगत और रहस्यमय तरीके से। 🙏</li>
+                </ul>
+            </div>
+        </article>
+
+        <section id="tyger-guide">
+            <h2>The Tyger</h2>
+
+            <article class="card">
+                <div class="card-header">
+                    <h3>Title Explanation: "The Tyger"</h3>
+                    <button class="hindi-toggle-btn" aria-expanded="false" aria-controls="tyger-title-hindi">हिं</button>
+                </div>
+                <p><strong>"Tyger":</strong> The archaic spelling (older form of "Tiger") immediately sets a mythical, timeless, and slightly exotic tone. It distances the creature from a simple zoo animal and elevates it to a symbolic level.</p>
+                <p><strong>Connotations:</strong> The word itself evokes power, ferocity, danger, and a wild, untamable beauty. It is the embodiment of raw, primal energy.</p>
+                <p><strong>Interpretive Angles:</strong></p>
+                <ol>
+                    <li><strong>Literal:</strong> At its simplest, the poem is about a tiger, wondering about the powerful being that could create such a fearsome animal.</li>
+                    <li><strong>Symbolic:</strong> The "Tyger" represents the fierce, terrifying, and dangerous aspects of the world and human nature—what Blake called "Experience." It symbolizes evil, violence, artistic creation, revolutionary energy, and the parts of God's creation that are not gentle or kind.</li>
+                </ol>
+                 <div id="tyger-title-hindi" class="hindi-panel">
+                    <p><strong>"Tyger":</strong> यह "Tiger" (बाघ) की पुरानी स्पेलिंग है। इससे कविता को एक पौराणिक, जादुई और रहस्यमयी एहसास मिलता है। 📜 यह जानवर को एक आम चिड़ियाघर के बाघ से अलग करके एक प्रतीक के स्तर पर ले जाता है।</p>
+                    <p><strong>इसका मतलब क्या है:</strong> यह शब्द शक्ति, क्रूरता, ख़तरे और एक जंगली, बेकाबू सुंदरता की भावना जगाता है। यह कच्ची, आदिम ऊर्जा का प्रतीक है।</p>
+                    <p><strong>इसे दो तरीकों से समझ सकते हैं:</strong></p>
+                    <ol>
+                        <li><strong>शाब्दिक अर्थ:</strong> सीधे-सीधे, यह कविता एक बाघ के बारे में है, और कवि सोच रहा है कि इतने ख़तरनाक जानवर को किस शक्तिशाली शक्ति ने बनाया होगा।</li>
+                        <li><strong>प्रतीकात्मक अर्थ:</strong> "टाइगर" दुनिया और इंसान के स्वभाव के उग्र, भयानक और ख़तरनाक पहलुओं का प्रतीक है - जिसे ब्लेक ने "अनुभव" (Experience) कहा है। यह बुराई, हिंसा, कलात्मक ऊर्जा, और भगवान की रचना के उन हिस्सों का प्रतीक है जो कोमल या दयालु नहीं हैं। 🔥</li>
+                    </ol>
+                </div>
+            </article>
+
+            <article class="card">
+                <div class="card-header">
+                    <h3>Poetic Form & Prosody</h3>
+                    <button class="hindi-toggle-btn" aria-expanded="false" aria-controls="tyger-prosody-hindi">हिं</button>
+                </div>
+                <ul>
+                    <li><strong>Form:</strong> Lyric poem, consisting of six quatrains (four-line stanzas).</li>
+                    <li><strong>Rhyme Scheme:</strong> AABB CCDD EEFF etc. (rhyming couplets). This simple, almost nursery-rhyme-like scheme creates a stark contrast with the poem's complex and terrifying subject matter.</li>
+                    <li><strong>Meter:</strong> Primarily Trochaic Tetrameter Catalectic. This means each line has roughly four "trochees" (a stressed syllable followed by an unstressed one: DA-dum), but the final unstressed syllable is dropped (catalectic).
+                        <ul>
+                            <li>Example: <strong>Ty</strong>-ger | <strong>Ty</strong>-ger | <strong>burn</strong>-ing | <strong>bright</strong></li>
+                        </ul>
+                        This creates a forceful, hammering, chant-like rhythm, mimicking a blacksmith's hammer or a beating heart.
+                    </li>
+                    <li><strong>Structural Features:</strong> The first and last stanzas are nearly identical, creating a powerful frame. The change from "Could frame" to "Dare frame" in the final stanza deepens the poem's central question from one of ability to one of audacity and courage.</li>
+                </ul>
+                <details class="scansion-help">
+                    <summary>Quick Tip: How to Read Meter</summary>
+                    <div>
+                        <p><strong>Meter</strong> is the rhythm of a poem. A "foot" is a basic unit of rhythm (like a trochee: STRESSED-unstressed). "Tetrameter" means there are four feet per line. To find the meter, read the line aloud and listen for the natural beats or stresses. Tapping it out can help!</p>
+                    </div>
+                </details>
+                <div id="tyger-prosody-hindi" class="hindi-panel">
+                    <ul>
+                        <li><strong>कविता का प्रकार:</strong> यह एक लिरिक (गीतिकाव्य) है, जिसमें चार-चार लाइनों वाले छह पैराग्राफ (quatrains) हैं।</li>
+                        <li><strong>तुकबंदी (Rhyme Scheme):</strong> AABB (पहली दो लाइनें एक जैसी, अगली दो एक जैसी)। यह बच्चों की कविता जैसी सरल तुकबंदी है, जो कविता के गहरे और डरावने विषय के साथ एक अजीब विरोधाभास पैदा करती है।</li>
+                        <li><strong>छंद (Meter):</strong> यह ज़्यादातर Trochaic Tetrameter है। इसका मतलब है कि हर लाइन में ज़ोर वाली और हल्की आवाज़ के चार जोड़े (DA-dum) हैं, और आख़िरी हल्की आवाज़ को हटा दिया गया है।
+                            <ul>
+                                <li>उदाहरण: <strong>Ty</strong>-ger | <strong>Ty</strong>-ger | <strong>burn</strong>-ing | <strong>bright</strong></li>
+                            </ul>
+                            यह एक ज़ोरदार, हथौड़े जैसी लय बनाता है, जैसे कोई लोहार काम कर रहा हो या दिल धड़क रहा हो। 🔨❤️
+                        </li>
+                        <li><strong>बनावट:</strong> पहला और आख़िरी पैराग्राफ लगभग एक जैसे हैं, जो कविता को एक मज़बूत ढाँचा देते हैं। आख़िरी पैराग्राफ में "Could frame" (कौन बना सकता था) से "Dare frame" (किसकी हिम्मत हुई बनाने की) में बदलाव कविता के सवाल को और गहरा कर देता है।</li>
+                    </ul>
+                </div>
+            </article>
+
+            <section class="poem-analysis-container">
+                <h3>The Complete Poem & Stanza-by-Stanza Analysis</h3>
+                <div class="stanza-block">
+                    <div class="poem-text-box">
+                        <pre>Tyger Tyger, burning bright, 
+In the forests of the night; 
+What immortal hand or eye, 
+Could frame thy fearful symmetry?</pre>
+                        <button class="hindi-toggle-btn" aria-expanded="false" aria-controls="tyger-s1-hindi">हिं</button>
+                        <div id="tyger-s1-hindi" class="hindi-panel">
+                            <p>कल्पना करो, रात के घने अंधेरे जंगल में एक बाघ है। 🔥 उसकी खाल ऐसी चमक रही है जैसे आग जल रही हो। कवि हैरान होकर पूछता है, "ऐसा कौन सा अमर हाथ या आँख होगी, जिसने तुम्हारी इस डरावनी, पर ख़ूबसूरत बनावट को गढ़ा होगा?"</p>
+                        </div>
+                    </div>
+                    <div class="analysis-box">
+                        <div>
+                            <h4>Difficult Words</h4>
+                            <ul>
+                                <li><b>Immortal:</b> Living forever; divine (अमर; दिव्य).</li>
+                                <li><b>Frame:</b> To create or construct the structure of something (ढाँचा बनाना; गढ़ना).</li>
+                                <li><b>Thy:</b> An old word for "your" (तुम्हारा).</li>
+                                <li><b>Fearful:</b> Causing fear; awesome or terrible (भयानक; विस्मयकारी).</li>
+                                <li><b>Symmetry:</b> Perfect, balanced proportions (समरूपता; संतुलन).</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4>Imagery, Symbols & Sound</h4>
+                            <ul>
+                                <li><b>Imagery:</b> The dominant image is of the tiger as a blazing fire ("burning bright") against the darkness ("forests of the night").</li>
+                                <li><b>Symbolism:</b> The "Tyger" symbolizes raw power and fearsome beauty. The "forests of the night" symbolize ignorance, confusion, and evil.</li>
+                                <li><b>Sound:</b> Strong alliteration in "<b>b</b>urning <b>b</b>right" and "<b>fr</b>ame thy <b>f</b>earful." The trochaic meter begins its hammering rhythm immediately.</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4>Stanza Focus (Theme & Tone)</h4>
+                            <p>This stanza sets the scene and introduces the central question. The tone is one of profound awe, wonder, and a touch of fear. It questions the origin and nature of such a creature. </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="stanza-block">
+                    <div class="poem-text-box">
+                        <pre>In what distant deeps or skies. 
+Burnt the fire of thine eyes?
+On what wings dare he aspire?
+What the hand, dare seize the fire?</pre>
+                        <button class="hindi-toggle-btn" aria-expanded="false" aria-controls="tyger-s2-hindi">हिं</button>
+                        <div id="tyger-s2-hindi" class="hindi-panel">
+                            <p>कवि आगे सोचता है, "तुम्हारी आँखों में जलने वाली ये आग कहाँ से लाई गई? क्या इसे दूर आसमान से लाया गया या गहरी पाताल से? 🌌 वो कौन था जिसने पंखों पर उड़कर इतनी ऊँची उड़ान भरने की हिम्मत की? और वो कौन सा हाथ था जिसने इस आग को पकड़ने का साहस किया?" यह बनाने वाले की हिम्मत और शक्ति पर एक सवाल है।</p>
+                        </div>
+                    </div>
+                    <div class="analysis-box">
+                        <div>
+                            <h4>Difficult Words</h4>
+                            <ul>
+                                <li><b>Deeps:</b> Deep places, like the ocean or hell (गहराई; पाताल).</li>
+                                <li><b>Thine:</b> An old word for "your" (तुम्हारा).</li>
+                                <li><b>Aspire:</b> To have ambitious hopes or plans; to rise high (महत्वाकांक्षा करना; ऊँचा उठना).</li>
+                                <li><b>Seize:</b> To take hold of suddenly and forcibly (ज़बरदस्ती पकड़ना; छीन लेना).</li>
+                                <li><b>Dare:</b> To have the courage to do something (हिम्मत करना; साहस करना).</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4>Imagery, Symbols & Sound</h4>
+                            <ul>
+                                <li><b>Imagery:</b> The imagery expands to cosmic scales: "deeps or skies," suggesting heaven or hell. The creator is imagined as a daring, winged figure, like Icarus or Prometheus from Greek mythology.</li>
+                                <li><b>Allusion:</b> "seize the fire" is a classical allusion to Prometheus, who stole fire from the gods for humanity.</li>
+                                <li><b>Sound:</b> The repeated "d" sound in "<b>d</b>istant <b>d</b>eeps" and "<b>d</b>are" adds to the forceful tone.</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4>Stanza Focus (Theme & Tone)</h4>
+                            <p>This stanza shifts focus to the creator. The questions are about the source of the tiger's ferocious energy and the sheer audacity of the creator who would harness such power. The tone becomes more dramatic and intense.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="stanza-block">
+                    <div class="poem-text-box">
+                        <pre>And what shoulder, & what art,
+Could twist the sinews of thy heart?
+And when thy heart began to beat,
+What dread hand? & what dread feet?</pre>
+                        <button class="hindi-toggle-btn" aria-expanded="false" aria-controls="tyger-s3-hindi">हिं</button>
+                        <div id="tyger-s3-hindi" class="hindi-panel">
+                            <p>अब कवि बनाने की प्रक्रिया के बारे में सोचता है। "वो कौन से कंधे थे जिनमें इतनी ताक़त थी, और वो कौन सी कला थी, जिससे तुम्हारे दिल की मज़बूत मांसपेशियों (sinews) को मरोड़ा गया? 💪 और जब तुम्हारे दिल ने धड़कना शुरू किया, तो वो कौन से भयानक हाथ और कौन से भयानक पैर थे जो उस शक्ति के सामने खड़े रहे?"</p>
+                        </div>
+                    </div>
+                    <div class="analysis-box">
+                        <div>
+                            <h4>Difficult Words</h4>
+                            <ul>
+                                <li><b>Shoulder:</b> Symbolizes strength (कंधा; शक्ति).</li>
+                                <li><b>Art:</b> Skill, craft (कला; कौशल).</li>
+                                <li><b>Twist:</b> To form by interlacing or weaving (मरोड़ना; ऐंठना).</li>
+                                <li><b>Sinews:</b> The parts of a structure that give it strength; tendons or ligaments (नसें; मांसपेशियाँ).</li>
+                                <li><b>Dread:</b> Causing great fear or apprehension (भयानक; डरावना).</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4>Imagery, Symbols & Sound</h4>
+                            <ul>
+                                <li><b>Imagery:</b> The imagery is now intensely physical and anatomical: twisting sinews, a beating heart. The creator is portrayed as a being of immense physical strength.</li>
+                                <li><b>Symbolism:</b> The "heart" symbolizes the core of the tiger's being, its life force.</li>
+                                <li><b>Sound:</b> The repetition of "what" continues the relentless questioning. "<b>Dr</b>ead han<b>d</b>" and "<b>dr</b>ea<b>d</b> feet" uses consonance to create a heavy, fearful sound.</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4>Stanza Focus (Theme & Tone)</h4>
+                            <p>The focus narrows to the physical creation of the tiger's heart. The tone is one of intense, almost horrified, fascination with the physical power required for such a creation. The word "dread" appears, emphasizing the terror of the creative act.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="stanza-block">
+                    <div class="poem-text-box">
+                        <pre>What the hammer? what the chain,
+In what furnace was thy brain?
+What the anvil? what dread grasp,
+Dare its deadly terrors clasp?</pre>
+                        <button class="hindi-toggle-btn" aria-expanded="false" aria-controls="tyger-s4-hindi">हिं</button>
+                        <div id="tyger-s4-hindi" class="hindi-panel">
+                            <p>अब बनाने वाले की कल्पना एक लोहार के रूप में की गई है।  blacksmith 🔨 "वो कौन सा हथौड़ा था? वो कौन सी ज़ंजीर थी? तुम्हारा दिमाग़ किस भट्ठी में बनाया गया था? वो कौन सी निहाई (anvil) थी जिस पर तुम्हें गढ़ा गया? और वो कौन सी भयानक पकड़ थी जिसने तुम्हारे जानलेवा आतंक को कसकर पकड़ने की हिम्मत की?"</p>
+                        </div>
+                    </div>
+                    <div class="analysis-box">
+                        <div>
+                            <h4>Difficult Words</h4>
+                            <ul>
+                                <li><b>Hammer:</b> A tool for beating metals (हथौड़ा).</li>
+                                <li><b>Chain:</b> Used for binding or restraining (ज़ंजीर).</li>
+                                <li><b>Furnace:</b> An enclosed structure in which heat is generated, like for melting metal (भट्ठी).</li>
+                                <li><b>Anvil:</b> A heavy iron block on which heated metal is shaped (निहाई).</li>
+                                <li><b>Clasp:</b> To grasp tightly (कसकर पकड़ना).</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4>Imagery, Symbols & Sound</h4>
+                            <ul>
+                                <li><b>Imagery:</b> This stanza introduces the central metaphor of the creator as a blacksmith. We see industrial, hellish images: hammer, chain, furnace, anvil.</li>
+                                <li><b>Symbolism:</b> The blacksmith's forge symbolizes a place of intense, violent, and powerful creation, very different from the gentle creation of the Lamb.</li>
+                                <li><b>Sound:</b> The harsh, monosyllabic words ("what," "grasp," "clasp") and hard consonants ('k' in clasp) mimic the clang of metal on metal.</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4>Stanza Focus (Theme & Tone)</h4>
+                            <p>This is the climax of the creation narrative. The creator is now fully imagined as a divine blacksmith, forging the tiger in fire and metal. The tone is harsh, industrial, and filled with a sense of violent, powerful effort.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="stanza-block">
+                    <div class="poem-text-box">
+                        <pre>When the stars threw down their spears 
+And water'd heaven with their tears:
+Did he smile his work to see?
+Did he who made the Lamb make thee?</pre>
+                        <button class="hindi-toggle-btn" aria-expanded="false" aria-controls="tyger-s5-hindi">हिं</button>
+                        <div id="tyger-s5-hindi" class="hindi-panel">
+                            <p>अब कवि एक बहुत बड़ा सवाल पूछता है। "जब सितारों ने अपने भाले फेंक दिए और अपने आंसुओं से स्वर्ग को भिगो दिया (यानी, जब फ़रिश्तों ने विद्रोह किया और हार गए), तो क्या उसे (बनाने वाले को) अपनी यह रचना देखकर मुस्कान आई? 😊 और सबसे बड़ा सवाल: क्या जिसने 'मेमने' (The Lamb) को बनाया, उसी ने तुम्हें भी बनाया?"</p>
+                        </div>
+                    </div>
+                    <div class="analysis-box">
+                        <div>
+                            <h4>Difficult Words</h4>
+                            <ul>
+                                <li><b>Threw down their spears:</b> An image of surrender or defeat, possibly alluding to the fallen angels. (भाले फेंक दिए; हार मान ली).</li>
+                                <li><b>Water'd heaven with their tears:</b> Cried in sorrow or defeat (आँसुओं से स्वर्ग को भिगो दिया).</li>
+                                <li><b>Smile:</b> To show pleasure or amusement (मुस्कुराना).</li>
+                                <li><b>Lamb:</b> A symbol of innocence, gentleness, and Jesus Christ (मेमना).</li>
+                                <li><b>Thee:</b> An old word for "you" (तुम्हें).</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4>Imagery, Symbols & Sound</h4>
+                            <ul>
+                                <li><b>Imagery:</b> The imagery is cosmic and mythological. The "stars" are personified as angelic warriors who are defeated and weep.</li>
+                                <li><b>Symbolism:</b> This is a complex stanza. The falling stars could symbolize the defeat of Satan's angels, suggesting the tiger's creation is linked to the existence of evil.</li>
+                                <li><b>Juxtaposition:</b> The direct comparison between the maker of the Lamb (symbol of good/innocence) and the maker of the Tyger (symbol of evil/experience) is the poem's core philosophical problem.</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4>Stanza Focus (Theme & Tone)</h4>
+                            <p>This stanza represents the poem's philosophical turn, or volta. The question shifts from "how" the tiger was made to "why." It explicitly introduces the problem of good and evil, asking if the same God could be responsible for both innocence and terror. The tone becomes deeply theological and questioning.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="stanza-block">
+                    <div class="poem-text-box">
+                        <pre>Tyger Tyger burning bright,
+In the forests of the night:
+What immortal hand or eye,
+Dare frame thy fearful symmetry?</pre>
+                        <button class="hindi-toggle-btn" aria-expanded="false" aria-controls="tyger-s6-hindi">हिं</button>
+                        <div id="tyger-s6-hindi" class="hindi-panel">
+                            <p>कविता वहीं लौट आती है जहाँ से शुरू हुई थी, लेकिन एक छोटे से बदलाव के साथ। "टाइगर, टाइगर, रात के जंगलों में जलते हुए। वो कौन सा अमर हाथ या आँख थी जिसने तुम्हारी इस भयानक सुंदरता को बनाने की *हिम्मत* की?" 🤔 अब सवाल सिर्फ 'बनाने की क्षमता' का नहीं, बल्कि 'बनाने के साहस' का है।</p>
+                        </div>
+                    </div>
+                    <div class="analysis-box">
+                        <div>
+                            <h4>Difficult Words</h4>
+                            <ul>
+                                <li><b>Dare:</b> To have the courage to do something (हिम्मत करना). (This is the key change from "Could" in the first stanza).</li>
+                                <li><b>Frame:</b> To create or construct (गढ़ना).</li>
+                                <li><b>Fearful:</b> Causing fear; awesome (भयानक).</li>
+                                <li><b>Symmetry:</b> Perfect, balanced proportions (समरूपता).</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4>Imagery, Symbols & Sound</h4>
+                            <ul>
+                                <li><b>Repetition (Refrain):</b> The stanza repeats the first, creating a circular structure. This suggests the question is unanswerable and will echo forever.</li>
+                                <li><b>Word Choice:</b> The crucial shift from "Could" to "Dare" changes the entire meaning. "Could" questions ability, but "Dare" questions the morality and audacity of the creator.</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4>Stanza Focus (Theme & Tone)</h4>
+                            <p>The final stanza offers no answer, only a deeper, more profound question. By returning to the beginning, the poem emphasizes the eternal and unanswerable nature of the mystery. The tone is one of perpetual, awe-filled, and slightly terrified wonder.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+
+        <section id="lamb-guide">
+            <h2>The Lamb</h2>
+
+            <article class="card">
+                <div class="card-header">
+                    <h3>Title Explanation: "The Lamb"</h3>
+                    <button class="hindi-toggle-btn" aria-expanded="false" aria-controls="lamb-title-hindi">हिं</button>
+                </div>
+                <p><strong>"Lamb":</strong> The lamb is a powerful and traditional symbol in Western and Christian culture.</p>
+                <p><strong>Connotations:</strong> It evokes purity, gentleness, innocence, vulnerability, and sacrifice. It is the complete opposite of the tiger's ferocity.</p>
+                <p><strong>Interpretive Angles:</strong></p>
+                <ol>
+                    <li><strong>Literal:</strong> The poem is addressed to a small, gentle animal, a lamb, asking about its creator.</li>
+                    <li><strong>Symbolic:</strong> The "Lamb" represents the state of "Innocence." It is also a direct Christian symbol for Jesus Christ, who is called the "Lamb of God" (Agnus Dei). The poem connects the child speaker, the lamb, and Jesus in a trinity of innocence.</li>
+                </ol>
+                 <div id="lamb-title-hindi" class="hindi-panel">
+                    <p><strong>"Lamb" (मेमना):</strong> मेमना पश्चिमी और ईसाई संस्कृति में एक बहुत शक्तिशाली और पारंपरिक प्रतीक है।</p>
+                    <p><strong>इसका मतलब क्या है:</strong> यह पवित्रता, कोमलता, मासूमियत, और त्याग की भावना जगाता है। 🐑 यह बाघ की क्रूरता का ठीक उल्टा है।</p>
+                    <p><strong>इसे दो तरीकों से समझ सकते हैं:</strong></p>
+                    <ol>
+                        <li><strong>शाब्दिक अर्थ:</strong> यह कविता एक छोटे, कोमल जानवर, मेमने को संबोधित है, और उससे उसके बनाने वाले के बारे में पूछ रही है।</li>
+                        <li><strong>प्रतीकात्मक अर्थ:</strong> "मेमना" मासूमियत की अवस्था ("Innocence") का प्रतीक है। यह ईसा मसीह का भी एक सीधा ईसाई प्रतीक है, जिन्हें "ईश्वर का मेमना" (Lamb of God) कहा जाता है। कविता बोलने वाले बच्चे, मेमने और ईसा मसीह को मासूमियत की एक तिकड़ी में जोड़ती है। ✨</li>
+                    </ol>
+                </div>
+            </article>
+
+            <article class="card">
+                <div class="card-header">
+                    <h3>Poetic Form & Prosody</h3>
+                    <button class="hindi-toggle-btn" aria-expanded="false" aria-controls="lamb-prosody-hindi">हिं</button>
+                </div>
+                <ul>
+                    <li><strong>Form:</strong> Lyric poem, structured as a kind of catechism (a series of questions and answers for religious instruction). It has two ten-line stanzas.</li>
+                    <li><strong>Rhyme Scheme:</strong> AABB CCDD EE for each stanza. Like "The Tyger," it uses simple rhyming couplets, which enhances its nursery-rhyme or lullaby quality.</li>
+                    <li><strong>Meter:</strong> Primarily Trochaic Tetrameter, similar to "The Tyger," but the effect is completely different. Here, the rhythm feels gentle, rocking, and song-like rather than hammering.
+                        <ul>
+                            <li>Example: <strong>Lit</strong>-tle | <strong>Lamb</strong> who | <strong>made</strong> thee</li>
+                        </ul>
+                    </li>
+                    <li><strong>Structural Features:</strong> The poem is built on a question-and-answer structure. The first stanza asks "Who made thee?" and the second stanza provides the answer. The repetition of the first and last couplets in each stanza acts as a refrain, making it highly musical.</li>
+                </ul>
+                <div id="lamb-prosody-hindi" class="hindi-panel">
+                    <ul>
+                        <li><strong>कविता का प्रकार:</strong> यह एक लिरिक (गीतिकाव्य) है, जो एक तरह के प्रश्नोत्तर (catechism) के रूप में है। इसमें दस-दस लाइनों के दो पैराग्राफ हैं।</li>
+                        <li><strong>तुकबंदी (Rhyme Scheme):</strong> हर पैराग्राफ में AABB CCDD EE। "द टाइगर" की तरह, इसमें भी सरल तुकबंदी है, जो इसे बच्चों की कविता या लोरी जैसा एहसास देती है। 🎶</li>
+                        <li><strong>छंद (Meter):</strong> यह भी ज़्यादातर Trochaic Tetrameter है, लेकिन इसका असर बिलकुल अलग है। यहाँ लय ज़ोरदार हथौड़े जैसी नहीं, बल्कि कोमल, झुलाने वाली और संगीतमय लगती है।</li>
+                        <li><strong>बनावट:</strong> कविता सवाल-जवाब की बनावट पर आधारित है। पहले पैराग्राफ में पूछा जाता है "तुम्हें किसने बनाया?" और दूसरे में जवाब दिया जाता है। हर पैराग्राफ की पहली और आख़िरी दो लाइनों को दोहराने से यह बहुत संगीतमय बन जाती है।</li>
+                    </ul>
+                </div>
+            </article>
+
+            <section class="poem-analysis-container">
+                <h3>The Complete Poem & Stanza-by-Stanza Analysis</h3>
+                <div class="stanza-block">
+                    <div class="poem-text-box">
+                        <pre>         Little Lamb who made thee 
+         Dost thou know who made thee 
+Gave thee life & bid thee feed. 
+By the stream & o'er the mead;
+Gave thee clothing of delight,
+Softest clothing wooly bright;
+Gave thee such a tender voice,
+Making all the vales rejoice! 
+         Little Lamb who made thee 
+         Dost thou know who made thee</pre>
+                        <button class="hindi-toggle-btn" aria-expanded="false" aria-controls="lamb-s1-hindi">हिं</button>
+                        <div id="lamb-s1-hindi" class="hindi-panel">
+                            <p>एक बच्चा एक छोटे से मेमने से पूछ रहा है, "नन्हे मेमने, तुम्हें किसने बनाया? क्या तुम जानते हो तुम्हें किसने बनाया? 🐑 जिसने तुम्हें ज़िंदगी दी और नदी के किनारे और हरे-भरे मैदानों में चरने को कहा। जिसने तुम्हें इतने प्यारे, मुलायम, ऊनी और चमकीले कपड़े दिए। जिसने तुम्हें इतनी मीठी आवाज़ दी, जिसे सुनकर सारी वादियाँ ख़ुश हो जाती हैं! नन्हे मेमने, तुम्हें किसने बनाया?"</p>
+                        </div>
+                    </div>
+                    <div class="analysis-box">
+                        <div>
+                            <h4>Difficult Words</h4>
+                            <ul>
+                                <li><b>Thee/Thou:</b> Old words for "you" (तुम्हें/तुम).</li>
+                                <li><b>Dost:</b> Old word for "do" (करते हो).</li>
+                                <li><b>Bid:</b> To command or order (आज्ञा देना).</li>
+                                <li><b>O'er:</b> Short for "over" (के ऊपर).</li>
+                                <li><b>Mead:</b> A meadow; a grassy field (चारागाह; घास का मैदान).</li>
+                                <li><b>Vales:</b> Valleys (घाटियाँ).</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4>Imagery, Symbols & Sound</h4>
+                            <ul>
+                                <li><b>Imagery:</b> The imagery is pastoral and idyllic: a gentle stream, a green meadow. It creates a picture of a peaceful, safe, and nurturing world.</li>
+                                <li><b>Symbolism:</b> The lamb symbolizes pure innocence. The "clothing of delight" (its wool) symbolizes natural purity and the creator's loving care.</li>
+                                <li><b>Sound:</b> The soft 'l' sounds in "<b>L</b>itt<b>l</b>e <b>L</b>amb" and the repetition (refrain) create a gentle, musical, lullaby-like quality.</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4>Stanza Focus (Theme & Tone)</h4>
+                            <p>This stanza establishes the theme of benevolent creation. The speaker, a child, asks the central question. The tone is sweet, innocent, and full of gentle curiosity. The world described is one of harmony and divine provision.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="stanza-block">
+                    <div class="poem-text-box">
+                        <pre>         Little Lamb I'll tell thee,
+         Little Lamb I'll tell thee!
+He is called by thy name,
+For he calls himself a Lamb: 
+He is meek & he is mild, 
+He became a little child: 
+I a child & thou a lamb, 
+We are called by his name.
+         Little Lamb God bless thee. 
+         Little Lamb God bless thee.</pre>
+                         <button class="hindi-toggle-btn" aria-expanded="false" aria-controls="lamb-s2-hindi">हिं</button>
+                        <div id="lamb-s2-hindi" class="hindi-panel">
+                            <p>बच्चा अब ख़ुद जवाब देता है, "नन्हे मेमने, मैं तुम्हें बताता हूँ! 💡 जिसने तुम्हें बनाया है, उसे तुम्हारे ही नाम से पुकारा जाता है, क्योंकि वह ख़ुद को 'मेमना' (Lamb of God) कहता है। वह विनम्र और कोमल है। वह एक छोटा बच्चा (ईसा मसीह) बन गया था। मैं एक बच्चा हूँ और तुम एक मेमने हो, हम दोनों को उसी के नाम से पुकारा जाता है। नन्हे मेमने, ईश्वर तुम्हारा भला करे।" 🙏</p>
+                        </div>
+                    </div>
+                    <div class="analysis-box">
+                        <div>
+                            <h4>Difficult Words</h4>
+                            <ul>
+                                <li><b>Tell thee:</b> I will tell you (मैं तुम्हें बताऊँगा).</li>
+                                <li><b>He is called by thy name:</b> His name is the same as yours (उसे तुम्हारे नाम से पुकारा जाता है).</li>
+                                <li><b>Meek:</b> Quiet, gentle, and easily imposed on (विनम्र; विनीत).</li>
+                                <li><b>Mild:</b> Gentle and not easily provoked (सौम्य; कोमल).</li>
+                                <li><b>Bless:</b> To give a prayer asking for God's favor and protection (आशीर्वाद देना).</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4>Imagery, Symbols & Sound</h4>
+                            <ul>
+                                <li><b>Allusion:</b> The entire stanza is a Christian allusion. "He calls himself a Lamb" refers to Jesus as the Lamb of God. "He became a little child" refers to the incarnation of Jesus.</li>
+                                <li><b>Symbolism:</b> A trinity of innocence is created: the Lamb (animal), the Child (speaker), and Christ (the divine). They are all united under the name "Lamb."</li>
+                                <li><b>Sound:</b> The repetition of "Little Lamb" and the simple, declarative sentences create a tone of simple, unwavering faith and certainty.</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4>Stanza Focus (Theme & Tone)</h4>
+                            <p>This stanza provides the answer with complete confidence. It identifies the creator as God, embodied by the gentle and loving figure of Jesus Christ. The tone is one of joyful certainty, faith, and blessing. The world of Innocence has clear, comforting answers.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+
+        <section id="combined-analysis">
+            <article class="card">
+                <h3>Devices Deep-Dive: A Glossary</h3>
+                <dl>
+                    <dt><strong>Apostrophe</strong></dt>
+                    <dd>A figure of speech where the speaker addresses an absent person, an abstract idea, or an object. <br><em>Example: "Little Lamb who made thee" and "Tyger Tyger, burning bright." In both poems, the speaker directly talks to the animal.</em></dd>
+                    
+                    <dt><strong>Rhetorical Question</strong></dt>
+                    <dd>A question asked not to receive an answer, but to make a point or create a dramatic effect. <br><em>Example: "Did he who made the Lamb make thee?" The poem is built on these questions, which express the speaker's awe and philosophical doubt.</em></dd>
+                    
+                    <dt><strong>Symbolism</strong></dt>
+                    <dd>The use of objects or ideas to represent something else. <br><em>Example: The <strong>Lamb</strong> symbolizes innocence, Christ, and gentle creation. The <strong>Tyger</strong> symbolizes experience, terrifying power, and the darker aspects of creation.</em></dd>
+
+                    <dt><strong>Allusion</strong></dt>
+                    <dd>An indirect reference to a person, place, event, or another literary work. <br><em>Example: The reference to Jesus as the "Lamb of God" in "The Lamb." The mention of seizing "fire" in "The Tyger" alludes to the Greek myth of Prometheus.</em></dd>
+
+                    <dt><strong>Metaphor</strong></dt>
+                    <dd>A comparison between two unlike things without using "like" or "as." <br><em>Example: "In what furnace was thy brain?" The tiger's creation is metaphorically compared to the work of a blacksmith in his forge.</em></dd>
+
+                    <dt><strong>Juxtaposition</strong></dt>
+                    <dd>Placing two contrasting elements side by side to highlight their differences. <br><em>Example: The entirety of Blake's project is a juxtaposition of Innocence ("The Lamb") and Experience ("The Tyger"). Within "The Tyger," the Lamb is explicitly mentioned to create a stark contrast.</em></dd>
+                </dl>
+            </article>
+
+            <article class="card">
+                <div class="card-header">
+                    <h3>Critical Analysis: The Two Contrary States of the Soul</h3>
+                     <button class="hindi-toggle-btn" aria-expanded="false" aria-controls="critical-hindi">हिं</button>
+                </div>
+                <p>William Blake's "The Lamb" and "The Tyger" are not merely two poems about animals; they are pillars of his visionary mythology, representing what he termed "The Two Contrary States of the Human Soul." Read together, they form a profound dialectic on the nature of God, creation, and human existence. "The Lamb," from <em>Songs of Innocence</em>, presents a world of gentle harmony, simple faith, and benevolent creation. "The Tyger," from <em>Songs of Experience</em>, shatters this worldview with its vision of a terrifying, violent, and awe-inspiring power.</p>
+                <p>The craftsmanship of each poem is perfectly tailored to its theme. "The Lamb" employs a simple, musical structure with a song-like trochaic meter and a question-and-answer format. The speaker, a child, asks a question and provides the answer with unwavering certainty. The creator is identified with Jesus, the "Lamb of God," who is "meek & mild." This world is safe, knowable, and governed by a loving, paternal God. The poem creates a unified trinity of the lamb, the child, and Christ, all sharing in a state of blessed innocence. There are no doubts, only comforting certainties.</p>
+                <p>In stark contrast, "The Tyger" is a barrage of unanswered questions. Its trochaic meter is not gentle but a hammering, industrial rhythm that evokes the blacksmith's forge. The central metaphor shifts from a pastoral shepherd to a divine, possibly demonic, blacksmith who "twists the sinews" and forges the tiger's brain in a furnace. The creative act is not gentle but violent, audacious, and terrifying. The poem’s speaker is not a confident child but an overwhelmed, awe-struck observer grappling with a creator who could fashion such "fearful symmetry." The crucial question, "Did he who made the Lamb make thee?" lies at the heart of the problem of theodicy—the question of why a good God permits the manifestation of evil. The poem offers no answer, ending on a note of perpetual mystery by repeating the first stanza, but deepening the question by changing "Could" to "Dare."</p>
+                <p>Blake’s genius lies in his understanding that these two states are not simply "good" versus "evil." They are "contraries," not "negations." Innocence is a necessary state, but it is incomplete without the knowledge gained through Experience. Experience, with its pain, terror, and complexity (symbolized by the Tyger), is also a necessary part of the human journey and divine creation. One cannot fully understand the divine by only looking at the Lamb; one must also confront the Tyger. The creator of the Tyger is not necessarily evil, but a being of immense, untamable power, whose motives are beyond human comprehension. The poem suggests that creation, art, and even revolution require a terrifying, fiery energy that the gentle world of the Lamb cannot contain.</p>
+                <p>Today, these poems remain essential because they articulate fundamental questions that continue to challenge us. They force us to consider the duality within ourselves and the world: our capacity for both gentleness and ferocity, our desire for simple faith and our struggle with complex doubts. Blake does not provide an easy answer but instead offers a powerful vision: that a complete understanding of life requires embracing both the Lamb and the Tyger, the serene and the sublime, the comforting and the terrifying.</p>
+                <div id="critical-hindi" class="hindi-panel">
+                    <p>विलियम ब्लेक की कविताएँ "द लैम्ब" और "द टाइगर" सिर्फ जानवरों के बारे में नहीं हैं; वे उनकी पौराणिक दुनिया के दो स्तंभ हैं, जो "मनुष्य की आत्मा की दो विपरीत अवस्थाओं" को दर्शाते हैं। "द लैम्ब" (मासूमियत के गीत से) एक ऐसी दुनिया दिखाती है जहाँ सब कुछ सामंजस्यपूर्ण, सरल और प्रेमपूर्ण है। वहीं, "द टाइगर" (अनुभव के गीत से) इस दुनिया को एक भयानक, शक्तिशाली और विस्मयकारी दृष्टि से तोड़ देता है।</p>
+                    <p>कविताओं की बनावट उनके विषय के अनुसार एकदम सटीक है। "द लैम्ब" की संरचना सरल, संगीतमय और प्रश्नोत्तर शैली में है। बच्चा सवाल पूछता है और पूरे विश्वास के साथ जवाब देता है कि बनाने वाला ईसा मसीह है, जो "विनम्र और कोमल" हैं। यह दुनिया सुरक्षित और प्रेमपूर्ण ईश्वर द्वारा शासित है।</p>
+                    <p>इसके विपरीत, "द टाइगर" अनसुलझे सवालों की एक बौछार है। इसकी लय हथौड़े की चोट जैसी है, जो एक लोहार की भट्ठी की याद दिलाती है। यहाँ बनाने वाला कोई चरवाहा नहीं, बल्कि एक दैवीय लोहार है जो बाघ को आग में गढ़ता है। यह निर्माण कोमल नहीं, बल्कि हिंसक और भयानक है। इसका सबसे बड़ा सवाल, "क्या मेमने को बनाने वाले ने ही तुम्हें भी बनाया?" ईश्वर की अच्छाई पर सवाल उठाता है कि अगर वह अच्छा है तो दुनिया में बुराई क्यों है। कविता कोई जवाब नहीं देती, बल्कि सवाल को और गहरा कर देती है।</p>
+                    <p>ब्लेक की महानता इस समझ में है कि ये दोनों अवस्थाएँ सिर्फ 'अच्छा' बनाम 'बुरा' नहीं हैं। ये एक-दूसरे की 'विरोधी' हैं, लेकिन एक-दूसरे को काटती नहीं। मासूमियत ज़रूरी है, पर अनुभव के बिना अधूरी है। टाइगर द्वारा दर्शाया गया अनुभव, अपने दर्द और डर के साथ, जीवन की यात्रा और सृष्टि का एक ज़रूरी हिस्सा है। ईश्वर को समझने के लिए सिर्फ मेमने को देखना काफ़ी नहीं; टाइगर का भी सामना करना होगा।</p>
+                    <p>आज भी ये कविताएँ महत्वपूर्ण हैं क्योंकि ये वे बुनियादी सवाल उठाती हैं जो हमें आज भी चुनौती देते हैं। वे हमें अपने और दुनिया के भीतर के द्वंद्व पर विचार करने के लिए मजबूर करती हैं: कोमलता और क्रूरता, सरल विश्वास और गहरे संदेह। ब्लेक कोई आसान जवाब नहीं देते, बल्कि एक शक्तिशाली दृष्टि प्रदान करते हैं: जीवन की पूरी समझ के लिए मेमने और बाघ, दोनों को अपनाना ज़रूरी है।</p>
+                </div>
+            </article>
+
+            <article class="card quiz-card">
+                <h3>Review Quiz</h3>
+                <div class="quiz-container">
+                    <div class="quiz-question">
+                        <p><strong>1. "The Tyger" is part of which collection by William Blake?</strong></p>
+                        <ul>
+                            <li><input type="radio" name="q1"> a) Songs of Innocence</li>
+                            <li><input type="radio" name="q1"> b) Songs of Experience</li>
+                            <li><input type="radio" name="q1"> c) The Marriage of Heaven and Hell</li>
+                        </ul>
+                    </div>
+                    <div class="quiz-question">
+                        <p><strong>2. The meter of "The Tyger" is primarily...</strong></p>
+                        <ul>
+                            <li><input type="radio" name="q2"> a) Iambic Pentameter</li>
+                            <li><input type="radio" name="q2"> b) Anapestic Trimeter</li>
+                            <li><input type="radio" name="q2"> c) Trochaic Tetrameter</li>
+                        </ul>
+                    </div>
+                    <div class="quiz-question">
+                        <p><strong>3. In "The Tyger," the creator is metaphorically portrayed as a...</strong></p>
+                        <ul>
+                            <li><input type="radio" name="q3"> a) Shepherd</li>
+                            <li><input type="radio" name="q3"> b) Blacksmith</li>
+                            <li><input type="radio" name="q3"> c) Painter</li>
+                        </ul>
+                    </div>
+                     <div class="quiz-question">
+                        <p><strong>4. What key word changes between the first and last stanzas of "The Tyger"?</strong></p>
+                        <ul>
+                            <li><input type="radio" name="q4"> a) Hand to Eye</li>
+                            <li><input type="radio" name="q4"> b) Burning to Glowing</li>
+                            <li><input type="radio" name="q4"> c) Could to Dare</li>
+                        </ul>
+                    </div>
+                     <div class="quiz-question">
+                        <p><strong>5. The speaker in "The Lamb" is a...</strong></p>
+                        <ul>
+                            <li><input type="radio" name="q5"> a) Shepherd</li>
+                            <li><input type="radio" name="q5"> b) Child</li>
+                            <li><input type="radio" name="q5"> c) Priest</li>
+                        </ul>
+                    </div>
+                    <div class="quiz-question">
+                        <p><strong>6. "The Lamb" identifies its creator with...</strong></p>
+                        <ul>
+                            <li><input type="radio" name="q6"> a) Nature</li>
+                            <li><input type="radio" name="q6"> b) The poet himself</li>
+                            <li><input type="radio" name="q6"> c) Jesus Christ</li>
+                        </ul>
+                    </div>
+                    <div class="quiz-question">
+                        <p><strong>7. The overall tone of "The Lamb" is one of...</strong></p>
+                        <ul>
+                            <li><input type="radio" name="q7"> a) Fearful awe</li>
+                            <li><input type="radio" name="q7"> b) Joyful certainty</li>
+                            <li><input type="radio" name="q7"> c) Sarcastic criticism</li>
+                        </ul>
+                    </div>
+                    <div class="quiz-question">
+                        <p><strong>8. The rhyme scheme of both poems is primarily...</strong></p>
+                        <ul>
+                            <li><input type="radio" name="q8"> a) AABB (Couplets)</li>
+                            <li><input type="radio" name="q8"> b) ABAB (Alternate Rhyme)</li>
+                            <li><input type="radio" name="q8"> c) ABBA (Enclosed Rhyme)</li>
+                        </ul>
+                    </div>
+                     <div class="quiz-question">
+                        <p><strong>9. The "fearful symmetry" of the Tyger refers to its...</strong></p>
+                        <ul>
+                            <li><input type="radio" name="q9"> a) Wild and unpredictable nature</li>
+                            <li><input type="radio" name="q9"> b) Perfectly balanced but terrifying form</li>
+                            <li><input type="radio" name="q9"> c) Striped pattern</li>
+                        </ul>
+                    </div>
+                    <div class="quiz-question">
+                        <p><strong>10. The literary device of directly addressing an animal like the Tyger or Lamb is called...</strong></p>
+                        <ul>
+                            <li><input type="radio" name="q10"> a) Personification</li>
+                            <li><input type="radio" name="q10"> b) Simile</li>
+                            <li><input type="radio" name="q10"> c) Apostrophe</li>
+                        </ul>
+                    </div>
+                    <div class="quiz-question">
+                        <p><strong>11. Blake's "contrary states" are...</strong></p>
+                        <ul>
+                            <li><input type="radio" name="q11"> a) Good and Evil</li>
+                            <li><input type="radio" name="q11"> b) Innocence and Experience</li>
+                            <li><input type="radio" name="q11"> c) Heaven and Hell</li>
+                        </ul>
+                    </div>
+                     <div class="quiz-question">
+                        <p><strong>12. "On what wings dare he aspire?" in "The Tyger" might allude to...</strong></p>
+                        <ul>
+                            <li><input type="radio" name="q12"> a) The story of Noah's Ark</li>
+                            <li><input type="radio" name="q12"> b) The Greek myth of Icarus or Prometheus</li>
+                            <li><input type="radio" name="q12"> c) The Holy Spirit as a dove</li>
+                        </ul>
+                    </div>
+                     <div class="quiz-question">
+                        <p><strong>13. Blake was a prominent figure in which literary movement?</strong></p>
+                        <ul>
+                            <li><input type="radio" name="q13"> a) The Enlightenment</li>
+                            <li><input type="radio" name="q13"> b) Modernism</li>
+                            <li><input type="radio" name="q13"> c) Romanticism</li>
+                        </ul>
+                    </div>
+
+                    <div class="quiz-question"><p>14. The Tyger is described as "burning bright, In the forests of the <input type="text" placeholder="Answer...">."</p></div>
+                    <div class="quiz-question"><p>15. In "The Tyger," the poet asks, "What the hammer? what the chain, In what <input type="text" placeholder="Answer..."> was thy brain?"</p></div>
+                    <div class="quiz-question"><p>16. The second stanza of "The Lamb" states that the creator "is <input type="text" placeholder="Answer..."> & he is mild."</p></div>
+                    <div class="quiz-question"><p>17. The Lamb is given "clothing of delight, Softest clothing <input type="text" placeholder="Answer..."> bright."</p></div>
+                    <div class="quiz-question"><p>18. The archaic spelling of tiger used by Blake is <input type="text" placeholder="Answer...">.</p></div>
+                    <div class="quiz-question"><p>19. The central philosophical question of "The Tyger" is whether the same creator made both the Lamb and the <input type="text" placeholder="Answer...">.</p></div>
+                    <div class="quiz-question"><p>20. The creator of the lamb "became a little <input type="text" placeholder="Answer...">."</p></div>
+                    <div class="quiz-question"><p>21. The "stars threw down their spears / And water'd heaven with their <input type="text" placeholder="Answer...">" before the central question of stanza 5.</p></div>
+                    <div class="quiz-question"><p>22. The lamb is fed "By the stream & o'er the <input type="text" placeholder="Answer...">."</p></div>
+                    <div class="quiz-question"><p>23. The rhythmic unit of a stressed syllable followed by an unstressed one (DA-dum) is called a <input type="text" placeholder="Answer...">.</p></div>
+                    <div class="quiz-question"><p>24. The poet directly connects himself to the lamb by stating, "I a child & <input type="text" placeholder="Answer..."> a lamb."</p></div>
+                    <div class="quiz-question"><p>25. The tone of "The Tyger" can be described as one of fearful <input type="text" placeholder="Answer...">.</p></div>
+                </div>
+            </article>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2025 NAVAGRA ENTERPRISES. All Rights Reserved.</p>
+        <p>DESIGNED AND WRITTEN BY Vishnu Sharma</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Get all Hindi toggle buttons
+            const toggleButtons = document.querySelectorAll('.hindi-toggle-btn');
+
+            toggleButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const panelId = button.getAttribute('aria-controls');
+                    const panel = document.getElementById(panelId);
+                    
+                    if (panel) {
+                        // Toggle visibility
+                        const isVisible = panel.classList.toggle('visible');
+                        
+                        // Update ARIA attribute for accessibility
+                        button.setAttribute('aria-expanded', isVisible);
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>

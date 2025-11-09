@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Solitary Reaper: A Study Guide by William Wordsworth</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-dark-bg: #1b262c;
+            --color-primary: #0f4c75;
+            --color-secondary: #3282b8;
+            --color-light-accent: #bbe1fa;
+            --color-white: #ffffff;
+            --color-text: #2c3e50;
+            --font-heading: 'Poppins', sans-serif;
+            --font-body: 'Merriweather', serif;
+            --border-radius-large: 16px;
+            --shadow: 0 8px 24px rgba(15, 76, 117, 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--color-text);
+            background-color: #f9fcff;
+            line-height: 1.8;
+            font-size: 17px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+            display: grid;
+            gap: 2.5rem;
+        }
+
+        h1, h2, h3 {
+            font-family: var(--font-heading);
+            color: var(--color-primary);
+            line-height: 1.3;
+        }
+
+        h1 { font-size: 3rem; }
+        h2 { font-size: 2rem; border-bottom: 3px solid var(--color-light-accent); padding-bottom: 0.5rem; margin-bottom: 1rem; }
+        h3 { font-size: 1.3rem; color: var(--color-secondary); margin-top: 1.5rem; margin-bottom: 0.5rem; }
+
+        .card {
+            background-color: var(--color-white);
+            border-radius: var(--border-radius-large);
+            box-shadow: var(--shadow);
+            padding: 2rem;
+            border: 1px solid #e0f2ff;
+            position: relative;
+        }
+        
+        /* --- Hero Section --- */
+        .hero {
+            text-align: center;
+            padding: 6rem 1.5rem;
+            background: linear-gradient(135deg, #e0f7fa 0%, #b2ebf2 100%);
+            color: var(--color-primary);
+        }
+        .hero h1 {
+            color: var(--color-dark-bg);
+        }
+        .hero .poet-name {
+            font-size: 1.5rem;
+            font-weight: 400;
+            font-family: var(--font-heading);
+            margin-top: 0.5rem;
+        }
+        .hero .hook {
+            font-size: 1.1rem;
+            margin-top: 1rem;
+            font-style: italic;
+            color: var(--color-secondary);
+        }
+
+        /* --- Hindi Toggle Functionality --- */
+        .toggle-hindi-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background-color: var(--color-secondary);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .toggle-hindi-btn:hover {
+            background-color: var(--color-primary);
+            transform: scale(1.1);
+        }
+        .hindi-panel {
+            display: none;
+            margin-top: 1rem;
+            padding: 1rem;
+            background-color: #f0faff;
+            border-left: 5px solid var(--color-secondary);
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+        .hindi-panel.show {
+            display: block;
+        }
+
+        /* --- Poem & Analysis Section --- */
+        .stanza {
+            margin-bottom: 2.5rem;
+        }
+        .original-text {
+            background-color: #eef8ff;
+            padding: 1.5rem;
+            border-radius: var(--border-radius-large);
+            font-size: 1.1em;
+            line-height: 2.2;
+            font-style: italic;
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+        .analysis-box {
+            padding: 1.5rem;
+            border: 1px solid #d4eaf7;
+            border-radius: var(--border-radius-large);
+        }
+        .analysis-box ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .analysis-box li {
+            margin-bottom: 0.75rem;
+        }
+        .analysis-box strong {
+            color: var(--color-primary);
+        }
+
+        /* --- Devices Deep Dive Card --- */
+        .devices-list dt {
+            font-weight: bold;
+            font-family: var(--font-heading);
+            color: var(--color-primary);
+            font-size: 1.1rem;
+        }
+        .devices-list dd {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+            font-style: italic;
+            color: #555;
+        }
+        .devices-list dd::before {
+            content: '→ ';
+            color: var(--color-secondary);
+        }
+
+        /* --- Quiz Card --- */
+        .quiz-question {
+            border: 1px solid #ddebf3;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 12px;
+        }
+        .quiz-question p {
+            font-weight: 600;
+            font-family: var(--font-heading);
+            margin-bottom: 0.5rem;
+        }
+        .mcq-options {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .mcq-options li {
+            padding: 0.25rem 0;
+        }
+
+        /* --- Footer --- */
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            background-color: var(--color-dark-bg);
+            color: var(--color-light-accent);
+            font-family: var(--font-heading);
+            font-size: 0.9rem;
+        }
+        .footer a {
+            color: var(--color-white);
+            text-decoration: none;
+        }
+
+        /* --- Prosody Collapsible --- */
+        details {
+            margin-top: 1rem;
+            border: 1px solid #d4eaf7;
+            border-radius: 8px;
+            padding: 0.5rem 1rem;
+        }
+        summary {
+            font-weight: bold;
+            cursor: pointer;
+            color: var(--color-secondary);
+            font-family: var(--font-heading);
+        }
+
+        /* --- Responsive Design --- */
+        @media (max-width: 768px) {
+            body { font-size: 16px; }
+            .container { padding: 1.5rem 1rem; gap: 2rem; }
+            h1 { font-size: 2.5rem; }
+            h2 { font-size: 1.75rem; }
+            .hero { padding: 4rem 1rem; }
+            .card { padding: 1.5rem; }
+            .toggle-hindi-btn { width: 35px; height: 35px; font-size: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="hero">
+        <h1>The Solitary Reaper</h1>
+        <p class="poet-name">by William Wordsworth</p>
+        <p class="hook">A single voice in a vast landscape, echoing through time and memory.</p>
+    </header>
+
+    <main class="container">
+        
+        <section id="title-explanation" class="card">
+            <h2>Title Explanation</h2>
+            <button class="toggle-hindi-btn" aria-expanded="false" data-target="hindi-title" title="Translate to Hindi">हिं</button>
+            
+            <p>The title "The Solitary Reaper" is simple yet profoundly evocative, setting the entire scene and mood of the poem before the first line is even read.</p>
+            
+            <h3>Key Word Breakdown:</h3>
+            <ul>
+                <li><strong>Solitary:</strong> This means to be alone, single, or isolated. It emphasizes the girl's separation from others, making her a singular, focused figure in the vast landscape. It suggests uniqueness and self-sufficiency.</li>
+                <li><strong>Reaper:</strong> This is a person who reaps, which means to cut or gather a crop, typically grain. It's a word tied to the earth, to harvest, to the cycles of nature, and to honest, rustic labor.</li>
+            </ul>
+
+            <h3>Interpretive Angles:</h3>
+            <ol>
+                <li><strong>Literal Meaning:</strong> The title literally describes what the poet sees: a single farm worker, a girl, harvesting grain all by herself in a field.</li>
+                <li><strong>Symbolic Meaning:</strong> Symbolically, the "Solitary Reaper" represents more than just a farm girl. She can be seen as a symbol of the isolated artist, creating beauty out of labor. She embodies the timeless connection between humanity and nature, and her mysterious song represents a universal human experience of joy, sorrow, and memory that transcends language and culture.</li>
+            </ol>
+            
+            <div id="hindi-title" class="hindi-panel">
+                <p>कविता का शीर्षक, "The Solitary Reaper," बहुत ही सरल लेकिन गहरा है। यह पहली पंक्ति पढ़ने से पहले ही पूरे दृश्य और कविता के मूड को सेट कर देता है।</p>
+                <p><strong>शब्दों का अर्थ:</strong></p>
+                <ul>
+                    <li><strong>Solitary (सॉलिटरी):</strong> इसका मतलब है अकेली, एकांत में। यह शब्द लड़की के अकेलेपन पर ज़ोर देता है, जैसे वो उस बड़े से मैदान में अकेली ही एक खास किरदार हो। 🧍‍♀️</li>
+                    <li><strong>Reaper (रीपर):</strong> इसका मतलब है फसल काटने वाला। यह शब्द ज़मीन, मेहनत और प्रकृति के चक्र से जुड़ा हुआ है। 🌾</li>
+                </ul>
+                <p><strong>शीर्षक के दो नजरिये:</strong></p>
+                <ol>
+                    <li><strong>शाब्दिक अर्थ:</strong> शीर्षक बस वही बताता है जो कवि देख रहे हैं - एक अकेली लड़की जो खेत में फसल काट रही है।</li>
+                    <li><strong>प्रतीकात्मक अर्थ:</strong> यह लड़की सिर्फ एक किसान नहीं, बल्कि एक प्रतीक है। वह एक अकेले कलाकार की तरह है जो अपनी मेहनत से कुछ सुंदर बना रही है। उसका रहस्यमयी गीत 🎶 पूरी इंसानियत के सुख-दुख की कहानी कहता है, जो भाषा और संस्कृति से भी परे है।</li>
+                </ol>
+            </div>
+        </section>
+
+        <section id="poet-intro" class="card">
+            <h2>About the Poet: William Wordsworth</h2>
+            <button class="toggle-hindi-btn" aria-expanded="false" data-target="hindi-poet" title="Translate to Hindi">हिं</button>
+            <p>William Wordsworth (1770-1850) is one of the most influential figures in English literature and a founding father of the English Romantic Movement. Raised in the scenic Lake District of England, his deep connection to the natural world became the cornerstone of his poetry.</p>
+            <ul>
+                <li><strong>Historical Context:</strong> Wordsworth wrote during a time of immense social and industrial change. He turned away from the crowded, chaotic cities to find purity, truth, and spiritual solace in nature and the lives of simple, rustic people.</li>
+                <li><strong>Core Preoccupations:</strong> His work constantly explores themes of nature's divine power, the importance of memory and emotion ("spontaneous overflow of powerful feelings recollected in tranquility"), the innocence of childhood, and the dignity of the common individual.</li>
+                <li><strong>Why this poem is representative:</strong> "The Solitary Reaper" is quintessentially Wordsworthian. It features a rustic, humble figure in a natural setting (the Scottish Highlands), and it focuses not on a grand event but on the profound, lasting emotional impact of a simple, fleeting moment on the poet's inner world. The entire poem is a perfect example of memory transforming a simple observation into a powerful work of art.</li>
+            </ul>
+             <div id="hindi-poet" class="hindi-panel">
+                <p>विलियम वर्ड्सवर्थ (1770-1850) अंग्रेज़ी साहित्य के एक महान कवि और English Romantic Movement के संस्थापकों में से एक थे। उनका बचपन इंग्लैंड के खूबसूरत लेक डिस्ट्रिक्ट 🏞️ में बीता, और प्रकृति से उनका यह गहरा लगाव उनकी कविताओं की जान बन गया।</p>
+                <p>वर्ड्सवर्थ उस दौर में लिखते थे जब उद्योग बढ़ रहे थे और शहर भीड़-भाड़ वाले हो रहे थे। उन्होंने शहरों के शोर से दूर, प्रकृति और गाँव के सीधे-सादे लोगों के जीवन में सच्चाई और शांति को खोजा।</p>
+                <p>उनकी कविताएँ अक्सर प्रकृति की शक्ति, यादों का महत्व (उनके अनुसार, कविता शक्तिशाली भावनाओं का सहज प्रवाह है जिसे शांति में याद किया जाता है), बचपन की मासूमियत और आम इंसान के सम्मान जैसे विषयों पर होती हैं।</p>
+                <p>"The Solitary Reaper" उनकी सोच का एक बेहतरीन उदाहरण है। इसमें स्कॉटलैंड के पहाड़ों का प्राकृतिक दृश्य है, एक साधारण ग्रामीण लड़की है, और कविता का फोकस किसी बड़ी घटना पर नहीं, बल्कि एक छोटे से पल के गहरे और लंबे समय तक रहने वाले असर पर है। यह कविता दिखाती है कि कैसे एक साधारण याद एक महान कला बन सकती है। ✨</p>
+            </div>
+        </section>
+
+        <section id="literary-period" class="card">
+            <h2>Literary Movement: Romanticism</h2>
+            <button class="toggle-hindi-btn" aria-expanded="false" data-target="hindi-period" title="Translate to Hindi">हिं</button>
+            <p>This poem is a cornerstone of Romanticism, a major literary and artistic movement that dominated Europe from the late 18th to the mid-19th century. It was a reaction against the logic and reason of the preceding Age of Enlightenment, choosing instead to champion emotion, imagination, and individualism.</p>
+            <h3>Key Features of Romanticism in this Poem:</h3>
+            <ul>
+                <li><strong>Emphasis on Emotion & Imagination:</strong> The poem is not a factual report. It's about the poet's <em>feelings</em>. He doesn't understand the song's words, so his imagination takes over, speculating about "old, unhappy, far-off things" or "natural sorrow, loss, or pain."</li>
+                <li><strong>Glorification of Nature:</strong> The setting in the Scottish Highlands is crucial. The solitary reaper is a part of this vast, beautiful, and slightly wild landscape. Her song seems to be a natural part of the "Vale profound."</li>
+                <li><strong>Focus on the Individual & the Common Man:</strong> The hero of the poem is not a king or a warrior, but an anonymous "Highland Lass." Romanticism found profound beauty and wisdom in the lives of ordinary, rustic people.</li>
+                <li><strong>The Sublime:</strong> The experience is overwhelming and awe-inspiring. The girl's voice fills the entire valley, and its effect on the speaker is so profound that he carries the "music in my heart" long after he can no longer hear it. This transcendent experience is a hallmark of the sublime.</li>
+            </ul>
+             <div id="hindi-period" class="hindi-panel">
+                <p>यह कविता Romanticism (रोमांटिकवाद) नामक एक बड़े साहित्यिक आंदोलन का एक प्रमुख उदाहरण है, जो 18वीं सदी के अंत से 19वीं सदी के मध्य तक यूरोप में छाया रहा। यह आंदोलन तर्क और विज्ञान पर आधारित पिछले युग (Age of Enlightenment) के खिलाफ एक प्रतिक्रिया थी। रोमांटिक कवियों ने तर्क की जगह भावनाओं, कल्पना और व्यक्ति की आज़ादी को महत्व दिया। 💖</p>
+                <p><strong>इस कविता में रोमांटिकवाद की झलकियाँ:</strong></p>
+                <ul>
+                    <li><strong>भावना और कल्पना पर ज़ोर:</strong> कवि सिर्फ यह नहीं बता रहे कि उन्होंने क्या देखा, बल्कि यह बता रहे हैं कि उन्होंने क्या <em>महसूस</em> किया। वह लड़की के गीत के शब्द नहीं समझते, इसलिए उनकी कल्पना 🧠 दौड़ पड़ती है - क्या वह पुराने दुखों या लड़ाइयों के बारे में गा रही है?</li>
+                    <li><strong>प्रकृति का महिमामंडन:</strong> स्कॉटलैंड की पहाड़ियों का दृश्य बहुत महत्वपूर्ण है। लड़की उस विशाल और खूबसूरत प्रकृति का ही एक हिस्सा लगती है, और उसका गीत पूरी घाटी में गूँजता है। 🌲</li>
+                    <li><strong>आम इंसान पर ध्यान:</strong> इस कविता का हीरो कोई राजा या योद्धा नहीं, बल्कि एक साधारण "Highland Lass" (पहाड़ी लड़की) है। रोमांटिक कवि आम लोगों के जीवन में गहरी सुंदरता और ज्ञान देखते थे।</li>
+                    <li><strong>उदात्त (The Sublime):</strong> यह अनुभव इतना शक्तिशाली और विस्मयकारी है कि यह कवि पर हावी हो जाता है। लड़की की आवाज़ पूरी घाटी को भर देती है, और उसका असर इतना गहरा होता है कि गीत बंद होने के बाद भी वह संगीत कवि के दिल में बस जाता है। यह असाधारण अनुभव ही 'उदात्त' कहलाता है।</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="poetic-form" class="card">
+            <h2>Poetic Form & Prosody</h2>
+            <button class="toggle-hindi-btn" aria-expanded="false" data-target="hindi-form" title="Translate to Hindi">हिं</button>
+            <ul>
+                <li><strong>Form:</strong> The poem is best described as a <strong>Lyrical Ballad</strong>. It's a ballad because it tells a brief story of an encounter, but it's lyrical because its primary focus is on the speaker's intense personal emotions, thoughts, and reflections.</li>
+                <li><strong>Structure:</strong> The poem consists of four <strong>octaves</strong> (eight-line stanzas).</li>
+                <li><strong>Rhyme Scheme:</strong> The rhyme scheme is slightly varied, which adds to its natural, song-like quality.
+                    <ul>
+                        <li>Stanza 1: <strong>ABAB CDCD</strong> (field/herself, Lass/pass, grain/strain, profound/sound).</li>
+                        <li>Stanza 2: <strong>ABAB CDCD</strong> (chaunt/haunt, bands/sands, heard/bird, seas/Hebrides).</li>
+                        <li>Stanza 3: <strong>ABAB CCDD</strong> (sings/things, flow/ago, lay/to-day, pain/again).</li>
+                        <li>Stanza 4: <strong>ABAB CCDD</strong> (sang/work, ending/bending, still/hill, bore/more).
+                        <em>(Note: Some analyses differ slightly, but this is a common interpretation.)</em></li>
+                    </ul>
+                </li>
+                <li><strong>Meter:</strong> The poem is written predominantly in <strong>Iambic Tetrameter</strong>. This means each line generally has eight syllables, arranged in four pairs of an unstressed syllable followed by a stressed syllable (da-DUM da-DUM da-DUM da-DUM). For example: "Be**hold** | her, **sin** | gle **in** | the **field**". This steady rhythm gives the poem a musical, walking pace.</li>
+                <li><strong>Key Sound Patterns:</strong> Wordsworth uses sound to create a musical effect that mirrors the reaper's song.
+                    <ul>
+                        <li><strong>Assonance:</strong> Repetition of vowel sounds, e.g., "s<strong>i</strong>nging... th<strong>i</strong>ngs". The long 'o' sound in "O listen! for the Vale profound / Is overflowing with the sound" makes the valley sound deep and resonant.</li>
+                        <li><strong>Consonance:</strong> Repetition of consonant sounds, e.g., "li<strong>st</strong>ened, motionle<strong>ss</strong> and <strong>st</strong>ill".</li>
+                    </ul>
+                </li>
+            </ul>
+             <details>
+                <summary>A quick tip on Scansion (counting meter)!</summary>
+                <div>
+                    <p>Scansion is the process of marking the stresses in a line of poetry. To find the meter, read the line aloud naturally and listen for the syllables you emphasize. An "iamb" is a two-syllable foot with the stress on the second syllable (like the word "destroy"). "Tetrameter" means there are four ("tetra") of these feet in a line. So, iambic tetrameter is a line with four iambs.</p>
+                </div>
+            </details>
+            <div id="hindi-form" class="hindi-panel">
+                <p>यह कविता कैसे लिखी गई है, आइए इसकी बनावट को समझते हैं। 📜</p>
+                <ul>
+                    <li><strong>कविता का प्रकार:</strong> इसे <strong>Lyrical Ballad (लिरिकल बैलेड)</strong> कह सकते हैं। यह 'बैलेड' है क्योंकि यह एक छोटी सी कहानी बताती है, और 'लिरिकल' है क्योंकि इसका मुख्य फोकस कवि की गहरी व्यक्तिगत भावनाओं और विचारों पर है।</li>
+                    <li><strong>संरचना:</strong> कविता में चार <strong>ऑक्टेव (octaves)</strong> हैं, यानी आठ-आठ पंक्तियों वाले चार पैराग्राफ (स्टैंजा)।</li>
+                    <li><strong>तुकबंदी (Rhyme Scheme):</strong> कविता की तुकबंदी थोड़ी अलग-अलग है, जिससे यह एक प्राकृतिक गीत जैसा लगता है।
+                        <ul>
+                             <li>पहला और दूसरा स्टैंजा: <strong>ABAB CDCD</strong></li>
+                             <li>तीसरा और चौथा स्टैंजा: <strong>ABAB CCDD</strong></li>
+                        </ul>
+                    </li>
+                    <li><strong>छंद (Meter):</strong> कविता ज़्यादातर <strong>Iambic Tetrameter (आयंबिक टेट्रामीटर)</strong> में लिखी गई है। इसका मतलब है कि हर लाइन में आमतौर पर आठ अक्षर (syllables) होते हैं, जो चार जोड़ों में बँटे होते हैं। हर जोड़े में पहला अक्षर हल्का और दूसरा ज़ोरदार होता है (da-DUM da-DUM da-DUM da-DUM)। यह लय कविता को एक संगीतमय और चलने जैसी गति देती है। 🎶</li>
+                    <li><strong>ध्वनि का खेल:</strong> वर्ड्सवर्थ आवाज़ों का उपयोग करके संगीत जैसा प्रभाव पैदा करते हैं:
+                        <ul>
+                            <li><strong>Assonance (स्वर की समानता):</strong> स्वरों का दोहराव, जैसे "O listen! for the Vale profound / Is overflowing with the sound" में 'o' की गहरी आवाज़।</li>
+                            <li><strong>Consonance (व्यंजन की समानता):</strong> व्यंजन ध्वनियों का दोहराव, जैसे "listened, motionle<strong>ss</strong> and <strong>st</strong>ill"।</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="poem-analysis" class="card">
+            <h2>The Complete Poem & Stanza-by-Stanza Analysis</h2>
+            
+            <article class="stanza" id="stanza-1">
+                <h3>Stanza 1</h3>
+                <div class="original-text">
+                    <button class="toggle-hindi-btn" aria-expanded="false" data-target="hindi-stanza-1" title="Translate to Hindi">हिं</button>
+                    <p>Behold her, single in the field,<br>
+                    Yon solitary Highland Lass!<br>
+                    Reaping and singing by herself;<br>
+                    Stop here, or gently pass!<br>
+                    Alone she cuts and binds the grain,<br>
+                    And sings a melancholy strain;<br>
+                    O listen! for the Vale profound<br>
+                    Is overflowing with the sound.</p>
+                </div>
+                <div class="analysis-box">
+                    <h4>Difficult Words:</h4>
+                    <ul>
+                        <li><strong>Behold:</strong> To see or look at something. (देखो)</li>
+                        <li><strong>Yon:</strong> An archaic word for "that" or "yonder," referring to something at a distance. (वो जो दूर है)</li>
+                        <li><strong>Highland Lass:</strong> A young woman from the Highlands of Scotland. (स्कॉटलैंड के पहाड़ों की लड़की)</li>
+                        <li><strong>Reaping:</strong> Cutting and gathering a crop. (फसल काटना)</li>
+                        <li><strong>Melancholy strain:</strong> A sad, mournful song or tune. (उदासी भरा गीत)</li>
+                        <li><strong>Vale profound:</strong> A deep valley. (गहरी घाटी)</li>
+                    </ul>
+                    <h4>Imagery, Symbols & Sound:</h4>
+                    <ul>
+                        <li><strong>Visual Imagery:</strong> A clear picture of a single girl working alone ("single in the field," "Alone she cuts") in a vast landscape.</li>
+                        <li><strong>Auditory Imagery:</strong> The focus immediately shifts to sound. The "melancholy strain" is so powerful that the "Vale profound / Is overflowing with the sound." This hyperbole (exaggeration) emphasizes the song's power.</li>
+                        <li><strong>Symbol:</strong> The girl herself is a symbol of solitude and harmony with nature.</li>
+                    </ul>
+                    <h4>Stanza Focus (Theme & Tone):</h4>
+                    <p>This opening stanza sets the scene and establishes a tone of quiet awe and reverence. The speaker is immediately captivated by the sight and sound of the girl. The direct commands ("Behold," "Stop here," "O listen!") pull the reader directly into the speaker's experience, making the moment feel immediate and significant.</p>
+                </div>
+                <div id="hindi-stanza-1" class="hindi-panel">
+                    <p>कल्पना कीजिए, कवि स्कॉटलैंड के पहाड़ों में घूम रहे हैं। 🏞️ अचानक उनकी नज़र एक अकेली लड़की पर पड़ती है जो खेत में फसल काट रही है। वह सिर्फ काम नहीं कर रही, बल्कि साथ में एक उदास सा, दिल को छू लेने वाला गीत भी गा रही है। उसकी आवाज़ इतनी गहरी और असरदार है कि पूरी घाटी 🎶 उसकी धुन से गूंज उठती है। कवि वहीं रुक जाते हैं, मंत्रमुग्ध होकर, और हमें भी कहते हैं - "देखो! सुनो! या तो यहीं रुको, या धीरे से गुज़र जाओ, पर इस पल को भंग मत करना।"</p>
+                </div>
+            </article>
+
+            <article class="stanza" id="stanza-2">
+                <h3>Stanza 2</h3>
+                <div class="original-text">
+                    <button class="toggle-hindi-btn" aria-expanded="false" data-target="hindi-stanza-2" title="Translate to Hindi">हिं</button>
+                    <p>No Nightingale did ever chaunt<br>
+                    More welcome notes to weary bands<br>
+                    Of travellers in some shady haunt,<br>
+                    Among Arabian sands:<br>
+                    A voice so thrilling ne'er was heard<br>
+                    In spring-time from the Cuckoo-bird,<br>
+                    Breaking the silence of the seas<br>
+                    Among the farthest Hebrides.</p>
+                </div>
+                <div class="analysis-box">
+                    <h4>Difficult Words:</h4>
+                    <ul>
+                        <li><strong>Nightingale:</strong> A small bird known for its beautiful, melodic song, often heard at night. (बुलबुल)</li>
+                        <li><strong>Chaunt:</strong> An archaic spelling of "chant," meaning to sing. (गाना)</li>
+                        <li><strong>Weary bands:</strong> Tired groups of people. (थके हुए यात्रियों के समूह)</li>
+                        <li><strong>Shady haunt:</strong> A cool, sheltered place. (छायादार ठिकाना)</li>
+                        <li><strong>Ne'er:</strong> A poetic contraction of "never." (कभी नहीं)</li>
+                        <li><strong>Hebrides:</strong> A group of islands off the west coast of Scotland. (स्कॉटलैंड के द्वीप समूह)</li>
+                    </ul>
+                    <h4>Imagery, Symbols & Sound:</h4>
+                    <ul>
+                        <li><strong>Hyperbole:</strong> The speaker uses extreme exaggeration to describe the song's beauty. He claims it's more beautiful than a Nightingale's song to tired travelers in an oasis and more thrilling than a Cuckoo's song in the remote Hebrides.</li>
+                        <li><strong>Imagery of Contrast:</strong> The imagery creates powerful contrasts: the hot "Arabian sands" vs. a "shady haunt," and the vast, silent "seas" vs. the Cuckoo's voice that breaks that silence. These exotic and remote locations make the reaper's simple song seem even more extraordinary and universal.</li>
+                    </ul>
+                    <h4>Stanza Focus (Theme & Tone):</h4>
+                    <p>This stanza moves from observation to imaginative comparison. The speaker tries to find words to describe the song's beauty but can only do so by saying what it is <em>better than</em>. By comparing her voice to the most beautiful sounds in nature from both exotic and remote locations, he elevates her simple, rustic song to a level of unparalleled, sublime artistry. The tone is one of profound admiration and wonder.</p>
+                </div>
+                <div id="hindi-stanza-2" class="hindi-panel">
+                    <p>कवि उस लड़की के गीत की तारीफ करने के लिए शब्द ढूंढ रहे हैं। वो कहते हैं कि उसकी आवाज़ इतनी मीठी है कि रेगिस्तान में थके-हारे यात्रियों 🚶‍♂️ के लिए बुलबुल का गीत भी इतना सुकून देने वाला नहीं होगा। उसकी आवाज़ वसंत में कूकने वाली कोयल 🐦 की आवाज़ से भी ज़्यादा रोमांचक है, जो दूर स्कॉटलैंड के सुनसान द्वीपों पर समंदर की खामोशी को तोड़ती है। इन शानदार तुलनाओं से, कवि हमें बताते हैं कि इस साधारण लड़की का गीत दुनिया के सबसे खूबसूरत गीतों से भी बढ़कर है।</p>
+                </div>
+            </article>
+
+            <article class="stanza" id="stanza-3">
+                <h3>Stanza 3</h3>
+                <div class="original-text">
+                    <button class="toggle-hindi-btn" aria-expanded="false" data-target="hindi-stanza-3" title="Translate to Hindi">हिं</button>
+                    <p>Will no one tell me what she sings?—<br>
+                    Perhaps the plaintive numbers flow<br>
+                    For old, unhappy, far-off things,<br>
+                    And battles long ago:<br>
+                    Or is it some more humble lay,<br>
+                    Familiar matter of to-day?<br>
+                    Some natural sorrow, loss, or pain,<br>
+                    That has been, and may be again?</p>
+                </div>
+                <div class="analysis-box">
+                    <h4>Difficult Words:</h4>
+                    <ul>
+                        <li><strong>Plaintive numbers:</strong> Sad, mournful verses or melodies. (शोक-गीत)</li>
+                        <li><strong>Far-off things:</strong> Events from the distant past. (बहुत पुरानी बातें)</li>
+                        <li><strong>Humble lay:</strong> A simple, ordinary song. (साधारण गीत)</li>
+                        <li><strong>Familiar matter:</strong> Common, everyday subjects or events. (रोज़मर्रा की बातें)</li>
+                        <li><strong>Natural sorrow:</strong> Grief or sadness that is a normal part of life. (स्वाभाविक दुःख)</li>
+                    </ul>
+                    <h4>Imagery, Symbols & Sound:</h4>
+                    <ul>
+                        <li><strong>Rhetorical Question:</strong> The stanza begins with a question ("Will no one tell me what she sings?") that the speaker doesn't expect an answer to. This highlights the communication barrier and opens the door for his own imagination.</li>
+                        <li><strong>Imagery of Time:</strong> The poet's speculation creates images spanning all of human history—from "battles long ago" to the "familiar matter of to-day."</li>
+                        <li><strong>Abstract Concepts:</strong> The stanza deals with universal, abstract ideas: sorrow, loss, pain, history, and the cyclical nature of human suffering ("That has been, and may be again").</li>
+                    </ul>
+                    <h4>Stanza Focus (Theme & Tone):</h4>
+                    <p>Here, the poem shifts from admiration to speculation. The speaker acknowledges that he cannot understand the Gaelic words of the song. This lack of understanding becomes the poem's central strength. It allows him to imagine the song's theme, covering the entire spectrum of human experience—from epic, historical tragedies to personal, everyday sorrows. The tone becomes more thoughtful and philosophical.</p>
+                </div>
+                <div id="hindi-stanza-3" class="hindi-panel">
+                    <p>अब कवि के मन में एक सवाल उठता है, "क्या कोई मुझे बताएगा कि वह क्या गा रही है?" 🤔 क्योंकि वह उसकी भाषा (Gaelic) नहीं समझ पाते। फिर वह खुद ही अंदाज़ा लगाने लगते हैं। क्या वह किसी पुरानी, दुखी कहानी के बारे में गा रही है? शायद सदियों पहले हुई लड़ाइयों ⚔️ के बारे में? या फिर यह कोई साधारण सा गीत है, जो रोज़मर्रा की ज़िंदगी के किसी दुःख, किसी नुकसान या दर्द के बारे में है? कोई ऐसा दर्द, जो पहले भी था, और शायद आगे भी होगा। इस तरह, कवि सोचते हैं कि उसका गीत शायद पूरी इंसानियत के साझा दुःख-दर्द की कहानी है।</p>
+                </div>
+            </article>
+            
+            <article class="stanza" id="stanza-4">
+                <h3>Stanza 4</h3>
+                <div class="original-text">
+                    <button class="toggle-hindi-btn" aria-expanded="false"data-target="hindi-stanza-4" title="Translate to Hindi">हिं</button>
+                    <p>Whate'er the theme, the Maiden sang<br>
+                    As if her song could have no ending;<br>
+                    I saw her singing at her work,<br>
+                    And o'er the sickle bending;—<br>
+                    I listened, motionless and still;<br>
+                    And, as I mounted up the hill,<br>
+                    The music in my heart I bore,<br>
+                    Long after it was heard no more.</p>
+                </div>
+                <div class="analysis-box">
+                    <h4>Difficult Words:</h4>
+                    <ul>
+                        <li><strong>Whate'er:</strong> A poetic contraction of "whatever." (जो कुछ भी)</li>
+                        <li><strong>Theme:</strong> The subject or main idea of the song. (विषय)</li>
+                        <li><strong>Maiden:</strong> An old-fashioned term for a young woman. (युवती)</li>
+                        <li><strong>Sickle:</strong> A short-handled farming tool with a semicircular blade, used for cutting grain. (दरांती)</li>
+                        <li><strong>Motionless:</strong> Without moving; still. (स्थिर, बिना हिले-डुले)</li>
+                        <li><strong>Bore:</strong> Carried. (ले गया, धारण किया)</li>
+                    </ul>
+                    <h4>Imagery, Symbols & Sound:</h4>
+                    <ul>
+                        <li><strong>Visual Imagery:</strong> A final, lasting image of the girl "singing at her work, / And o'er the sickle bending." This image beautifully merges her art (song) with her labor (reaping).</li>
+                        <li><strong>Symbol of Endless Art:</strong> The line "As if her song could have no ending" suggests the timeless, eternal quality of art and human expression.</li>
+                        <li><strong>Internalization:</strong> The physical action of the poet "mounted up the hill" signifies his departure, but the experience moves from an external sensory perception (hearing) to an internal, emotional memory ("The music in my heart I bore").</li>
+                    </ul>
+                    <h4>Stanza Focus (Theme & Tone):</h4>
+                    <p>This concluding stanza resolves the poem's speculation. The speaker decides the specific theme doesn't matter ("Whate'er the theme"). What matters is the beauty of the song and its profound effect on him. The poem ends by focusing on the power of memory. The physical sound fades as he walks away, but the emotional resonance—the music—is carried in his heart, becoming a permanent part of his inner world. The tone is one of peaceful, lasting gratitude and reflection.</p>
+                </div>
+                <div id="hindi-stanza-4" class="hindi-panel">
+                    <p>अंत में, कवि इस नतीजे पर पहुँचते हैं कि गीत का विषय जो भी हो, इससे कोई फर्क नहीं पड़ता। वह लड़की ऐसे गा रही थी मानो उसका गीत कभी खत्म ही नहीं होगा। ♾️ कवि ने उसे काम करते हुए और अपनी दरांती पर झुके हुए गाते देखा। वह बिना हिले-डुले, शांति से उसे सुनते रहे। और फिर, जब वह पहाड़ी पर चढ़कर आगे बढ़ने लगे, तो भले ही गीत की आवाज़ पीछे छूट गई, लेकिन उसका संगीत 💖 वह अपने दिल में हमेशा के लिए साथ ले गए। यह दिखाता है कि कला और खूबसूरत यादें हमारे जीवन का हिस्सा बन जाती हैं।</p>
+                </div>
+            </article>
+
+        </section>
+
+        <section id="devices" class="card">
+            <h2>Devices Deep-Dive: Figures of Speech</h2>
+            <dl class="devices-list">
+                <dt>Apostrophe</dt>
+                <dd>"O listen! for the Vale profound..." - The speaker directly addresses an abstract entity (the valley) or an implied audience, drawing the reader into the scene with urgency.</dd>
+                
+                <dt>Hyperbole</dt>
+                <dd>"No Nightingale did ever chaunt / More welcome notes..." - An extreme exaggeration used to emphasize the unparalleled beauty of the reaper's song, claiming it surpasses the most celebrated natural singers.</dd>
+                
+                <dt>Rhetorical Question</dt>
+                <dd>"Will no one tell me what she sings?—" - A question asked not to receive an answer, but to highlight the speaker's inability to understand the language and to transition into his own imaginative speculation.</dd>
+                
+                <dt>Imagery</dt>
+                <dd>The poem is rich in both auditory ("sings a melancholy strain") and visual ("o'er the sickle bending") imagery, creating a vivid and immersive experience for the reader.</dd>
+
+                <dt>Symbolism</dt>
+                <dd>The Solitary Reaper herself is a symbol of the harmony between humanity and nature, the dignity of labor, and the universal power of art to transcend linguistic and cultural barriers.</dd>
+            </dl>
+        </section>
+        
+        <section id="critical-analysis" class="card">
+            <h2>Critical Analysis</h2>
+            <button class="toggle-hindi-btn" aria-expanded="false" data-target="hindi-critical" title="Translate to Hindi">हिं</button>
+            <p>William Wordsworth’s "The Solitary Reaper" stands as a masterful exploration of the Romantic ideals of nature, imagination, and the profound impact of memory. At its core, the poem dramatizes a central tension between the perceived world and the world of the imagination. The speaker encounters a real "Highland Lass" in a real field, but the poem's power derives not from this factual observation, but from what the speaker *cannot* know: the meaning of her song. This linguistic barrier, this gap in understanding, becomes a fertile ground for the imagination to flourish. The unknown nature of the song allows it to become a vessel for universal human emotions—historic battles, everyday sorrows, and the timeless cycle of pain. Wordsworth suggests that the most profound art is that which speaks to us on a pre-lingual, emotional level, allowing the listener (or reader) to co-create its meaning.</p>
+            <p>Wordsworth’s craft is deceptively simple. His diction is largely plain and accessible, befitting the rustic subject. Yet, he masterfully elevates this simple scene to the level of the sublime. The structure of the poem guides the reader on a distinct emotional journey: from direct observation and awe (Stanza 1), to imaginative, hyperbolic comparison (Stanza 2), to philosophical speculation (Stanza 3), and finally, to the internalization of the experience into memory (Stanza 4). This movement from the external to the internal is a classic Wordsworthian theme. The sound of the poem, with its steady iambic tetrameter and flowing assonance ("Vale profound," "overflowing with the sound"), mirrors the very music it seeks to describe, creating a deeply harmonious reading experience.</p>
+            <p>The philosophical stakes of the poem are significant. It champions the idea that moments of profound spiritual and aesthetic insight are not confined to cathedrals or royal courts but can be found in the most humble of settings and people. The anonymous reaper, absorbed in her labor and her song, becomes a figure of immense power and dignity. She is an artist in her own right, creating something beautiful that transcends its immediate context. The poem’s final lines—"The music in my heart I bore, / Long after it was heard no more"—are perhaps the most famous articulation of Wordsworth's theory of poetry. The "spontaneous overflow of powerful feelings" (the initial hearing of the song) is later "recollected in tranquility," transformed by memory into a lasting internal treasure, which then becomes the poem itself. The physical sound is transient, but its emotional and spiritual essence becomes permanent through memory and art.</p>
+            <p>"The Solitary Reaper" continues to matter because it perfectly encapsulates the shift from a neoclassic focus on public, heroic subjects to a Romantic celebration of private, individual experience. It teaches us to find beauty in the everyday, to value the power of our own imagination, and to understand that the most meaningful experiences are often those that we carry within ourselves long after they have passed. Its classroom relevance is perennial, serving as an ideal text to introduce students to Romanticism, imagery, and the transformative power of poetry.</p>
+            <div id="hindi-critical" class="hindi-panel">
+                <p>विलियम वर्ड्सवर्थ की कविता "The Solitary Reaper" प्रकृति, कल्पना और यादों के गहरे असर का एक शानदार नमूना है। यह कविता एक देखी हुई दुनिया और एक कल्पना की दुनिया के बीच के तनाव को दिखाती है। कवि एक असली लड़की को खेत में काम करते हुए देखते हैं, लेकिन कविता की असली ताकत इस बात में है कि कवि उसके गीत का मतलब <em>नहीं</em> जानते। भाषा की यह दीवार ही कल्पना को उड़ान भरने का मौका देती है। गीत का विषय अज्ञात होने के कारण, वह सभी मानवीय भावनाओं का प्रतीक बन जाता है - चाहे वह पुरानी लड़ाइयाँ हों या रोज़मर्रा के दुख। वर्ड्सवर्थ कहते हैं कि सबसे महान कला वही है जो हमसे भाषा से पहले, भावनात्मक स्तर पर बात करती है।</p>
+                <p>कविता की बनावट बहुत सरल लगती है, लेकिन यह बहुत गहरी है। कविता हमें एक भावनात्मक यात्रा पर ले जाती है: पहले विस्मय और अवलोकन (Stanza 1), फिर कल्पनाशील तुलना (Stanza 2), फिर दार्शनिक सोच (Stanza 3), और अंत में, उस अनुभव का यादों में बस जाना (Stanza 4)। यह बाहरी दुनिया से भीतरी दुनिया तक का सफर वर्ड्सवर्थ की कविताओं की खासियत है।</p>
+                <p>इस कविता का दार्शनिक महत्व बहुत बड़ा है। यह बताती है कि महान अनुभव किसी महल या मंदिर में नहीं, बल्कि साधारण लोगों और जगहों में भी मिल सकते हैं। वह गुमनाम लड़की अपने काम और गीत में मगन, एक शक्तिशाली कलाकार बन जाती है। कविता की अंतिम पंक्तियाँ वर्ड्सवर्थ के काव्य-सिद्धांत को दर्शाती हैं - "The music in my heart I bore, / Long after it was heard no more।" शक्तिशाली भावनाओं का अनुभव (गीत सुनना) बाद में शांति में याद किया जाता है, और यादें उसे एक अनमोल खजाने में बदल देती हैं, और वही खजाना फिर कविता बन जाता है।</p>
+                <p>"The Solitary Reaper" आज भी महत्वपूर्ण है क्योंकि यह हमें रोज़मर्रा की चीज़ों में सुंदरता खोजना सिखाती है, अपनी कल्पना की शक्ति को महत्व देना सिखाती है, और यह समझाती है कि सबसे सार्थक अनुभव वो होते हैं जिन्हें हम गुज़र जाने के बाद भी अपने भीतर संजोकर रखते हैं।</p>
+            </div>
+        </section>
+
+        <section id="quiz" class="card">
+            <h2>Review Quiz</h2>
+            
+            <h3>Multiple Choice Questions (MCQs)</h3>
+            
+            <div class="quiz-question">
+                <p>1. In which country is the poem "The Solitary Reaper" set?</p>
+                <ul class="mcq-options">
+                    <li>(a) England</li>
+                    <li>(b) Ireland</li>
+                    <li>(c) Scotland</li>
+                    <li>(d) Wales</li>
+                </ul>
+            </div>
+            <div class="quiz-question">
+                <p>2. What is the "Highland Lass" doing in the field?</p>
+                <ul class="mcq-options">
+                    <li>(a) Planting seeds</li>
+                    <li>(b) Reaping and singing</li>
+                    <li>(c) Dancing and singing</li>
+                    <li>(d) Tending to sheep</li>
+                </ul>
+            </div>
+            <div class="quiz-question">
+                <p>3. The speaker compares the reaper's voice to which two birds?</p>
+                <ul class="mcq-options">
+                    <li>(a) Sparrow and Robin</li>
+                    <li>(b) Lark and Thrush</li>
+                    <li>(c) Nightingale and Cuckoo</li>
+                    <li>(d) Eagle and Hawk</li>
+                </ul>
+            </div>
+            <div class="quiz-question">
+                <p>4. What does the speaker find most mysterious about the reaper's song?</p>
+                <ul class="mcq-options">
+                    <li>(a) Its volume</li>
+                    <li>(b) Its language and theme</li>
+                    <li>(c) Its rhythm</li>
+                    <li>(d) Its sad tone</li>
+                </ul>
+            </div>
+            <div class="quiz-question">
+                <p>5. What kind of "strain" or song does the speaker say she sings?</p>
+                <ul class="mcq-options">
+                    <li>(a) A happy strain</li>
+                    <li>(b) A cheerful strain</li>
+                    <li>(c) A melancholy strain</li>
+                    <li>(d) A martial strain</li>
+                </ul>
+            </div>
+            <div class="quiz-question">
+                <p>6. The poem belongs to which literary movement?</p>
+                <ul class="mcq-options">
+                    <li>(a) Neoclassicism</li>
+                    <li>(b) Modernism</li>
+                    <li>(c) Victorianism</li>
+                    <li>(d) Romanticism</li>
+                </ul>
+            </div>
+            <div class="quiz-question">
+                <p>7. The term "Vale profound" means:</p>
+                <ul class="mcq-options">
+                    <li>(a) A shallow river</li>
+                    <li>(b) A high mountain</li>
+                    <li>(c) A deep valley</li>
+                    <li>(d) A dense forest</li>
+                </ul>
+            </div>
+            <div class="quiz-question">
+                <p>8. What is the central theme of the final stanza?</p>
+                <ul class="mcq-options">
+                    <li>(a) The difficulty of farm labor</li>
+                    <li>(b) The beauty of the landscape</li>
+                    <li>(c) The lasting power of memory and art</li>
+                    <li>(d) The sadness of the reaper's life</li>
+                </ul>
+            </div>
+            <div class="quiz-question">
+                <p>9. The Cuckoo-bird's song is heard in "the farthest _______".</p>
+                <ul class="mcq-options">
+                    <li>(a) Andes</li>
+                    <li>(b) Hebrides</li>
+                    <li>(c) Alps</li>
+                    <li>(d) Highlands</li>
+                </ul>
+            </div>
+             <div class="quiz-question">
+                <p>10. The poet uses hyperbole when comparing the reaper's song to what?</p>
+                <ul class="mcq-options">
+                    <li>(a) The sound of the wind</li>
+                    <li>(b) The songs of other reapers</li>
+                    <li>(c) The songs of the Nightingale and Cuckoo</li>
+                    <li>(d) The sound of a church bell</li>
+                </ul>
+            </div>
+            <div class="quiz-question">
+                <p>11. The poet speculates that the song might be about "battles ______".</p>
+                <ul class="mcq-options">
+                    <li>(a) of recent fame</li>
+                    <li>(b) still to come</li>
+                    <li>(c) long ago</li>
+                    <li>(d) for freedom</li>
+                </ul>
+            </div>
+            <div class="quiz-question">
+                <p>12. What does the poet do as he leaves the scene?</p>
+                <ul class="mcq-options">
+                    <li>(a) He waves goodbye</li>
+                    <li>(b) He mounts up the hill</li>
+                    <li>(c) He writes down the song</li>
+                    <li>(d) He asks for the girl's name</li>
+                </ul>
+            </div>
+            <div class="quiz-question">
+                <p>13. Wordsworth's famous definition of poetry is "the spontaneous overflow of powerful feelings recollected in _______".</p>
+                <ul class="mcq-options">
+                    <li>(a) solitude</li>
+                    <li>(b) company</li>
+                    <li>(c) tranquility</li>
+                    <li>(d) nature</li>
+                </ul>
+            </div>
+
+            <h3>Fill-in-the-Blanks</h3>
+
+            <div class="quiz-question">
+                <p>14. "Behold her, _______ in the field."</p>
+            </div>
+            <div class="quiz-question">
+                <p>15. "And sings a ________ strain."</p>
+            </div>
+            <div class="quiz-question">
+                <p>16. "O listen! for the Vale profound / Is ________ with the sound."</p>
+            </div>
+            <div class="quiz-question">
+                <p>17. "More welcome notes to ______ bands / Of travellers..."</p>
+            </div>
+            <div class="quiz-question">
+                <p>18. "Breaking the silence of the seas / Among the farthest _______."</p>
+            </div>
+            <div class="quiz-question">
+                <p>19. "Perhaps the _______ numbers flow..."</p>
+            </div>
+            <div class="quiz-question">
+                <p>20. "For old, unhappy, _______ things..."</p>
+            </div>
+            <div class="quiz-question">
+                <p>21. "Or is it some more humble ______, / Familiar matter of to-day?"</p>
+            </div>
+            <div class="quiz-question">
+                <p>22. "I saw her singing at her work, / And o'er the _______ bending..."</p>
+            </div>
+            <div class="quiz-question">
+                <p>23. "I listened, motionless and _______;"</p>
+            </div>
+             <div class="quiz-question">
+                <p>24. "The _______ in my heart I bore,"</p>
+            </div>
+            <div class="quiz-question">
+                <p>25. "Long after it was ______ no more."</p>
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 NAVAGRA ENTERPRISES. All Rights Reserved.</p>
+        <p>DESIGNED AND WRITTEN BY Vishnu Sharma.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggleButtons = document.querySelectorAll('.toggle-hindi-btn');
+
+            toggleButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const targetId = this.getAttribute('data-target');
+                    const targetPanel = document.getElementById(targetId);
+
+                    if (targetPanel) {
+                        const isExpanded = this.getAttribute('aria-expanded') === 'true';
+                        this.setAttribute('aria-expanded', !isExpanded);
+                        targetPanel.classList.toggle('show');
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>

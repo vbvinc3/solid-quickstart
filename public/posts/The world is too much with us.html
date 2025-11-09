@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Guide: The World is too much with us</title>
+    <style>
+        /* CSS Reset & Basic Setup */
+        :root {
+            --light-bg: #f0f8ff; /* AliceBlue, very light */
+            --light-accent: #bbe1fa;
+            --medium-accent: #3282b8;
+            --dark-accent: #0f4c75;
+            --text-color: #1b262c;
+            --card-shadow: 0 8px 20px rgba(15, 76, 117, 0.15);
+            --border-radius: 16px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--light-bg);
+            color: var(--text-color);
+            line-height: 1.7;
+            font-size: 16px;
+        }
+
+        /* Layout & Containers */
+        main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+            padding: 1rem;
+        }
+
+        .card, section {
+            width: 100%;
+            max-width: 900px;
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--card-shadow);
+            padding: 2rem;
+            border: 1px solid #e0f0ff;
+            overflow: hidden;
+        }
+
+        @media (max-width: 600px) {
+            body { font-size: 15px; }
+            .card, section { padding: 1.5rem; }
+        }
+
+        /* Typography */
+        h1, h2, h3 {
+            color: var(--dark-accent);
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        
+        h1 { font-size: 2.8rem; text-align: center; }
+        h2 { font-size: 1.8rem; border-bottom: 2px solid var(--light-accent); padding-bottom: 0.5rem; }
+        h3 { font-size: 1.2rem; color: var(--medium-accent); margin-top: 1.5rem; }
+        p, li { margin-bottom: 1rem; }
+        ul { list-style-position: inside; }
+        strong { color: var(--dark-accent); }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, #e0f7fa 0%, #bbe1fa 100%);
+            border-radius: var(--border-radius);
+            margin-bottom: 1rem;
+        }
+        .hero h1 {
+            color: var(--dark-accent);
+            font-size: 3.5rem;
+        }
+        .hero p {
+            font-size: 1.2rem;
+            color: #0f4c75;
+            margin-top: 0.5rem;
+        }
+        .hook {
+            margin-top: 1rem;
+            font-style: italic;
+            font-size: 1.1rem;
+            color: var(--text-color);
+        }
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 2.5rem; }
+            .hero { padding: 3rem 1.5rem; }
+        }
+
+        /* Interactive Hindi Toggle Elements */
+        .toggle-hindi-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Baloo Devanagari 2', cursive;
+            background-color: var(--medium-accent);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-left: 10px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .toggle-hindi-btn:hover {
+            background-color: var(--dark-accent);
+            transform: scale(1.1);
+        }
+        .hindi-explanation {
+            display: none;
+            margin-top: 1rem;
+            padding: 1.5rem;
+            background-color: #f0f8ff;
+            border-left: 4px solid var(--medium-accent);
+            border-radius: 8px;
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+        .hindi-explanation strong { color: var(--dark-accent); }
+
+        /* Poem Analysis Section */
+        .poem-section {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .original-text-box {
+            padding: 1.5rem;
+            background: var(--light-bg);
+            border-radius: 12px;
+            border: 1px solid var(--light-accent);
+        }
+        .poem-text {
+            font-family: "Georgia", serif;
+            font-size: 1.2rem;
+            line-height: 2.2;
+            white-space: pre-wrap;
+            color: #333;
+        }
+        .analysis-box {
+            padding: 1.5rem;
+            background: #fff;
+            border-radius: 12px;
+            border: 1px solid #e0f0ff;
+        }
+        .analysis-box h3 {
+            margin-top: 0;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+        .difficult-words ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .difficult-words li {
+            margin-bottom: 0.75rem;
+            border-bottom: 1px dashed var(--light-accent);
+            padding-bottom: 0.5rem;
+        }
+        .difficult-words b {
+            color: var(--dark-accent);
+        }
+
+        /* Prosody Card Specifics */
+        details {
+            margin-top: 1rem;
+            background-color: #f0f8ff;
+            border-radius: 8px;
+            padding: 0.5rem 1rem;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: var(--medium-accent);
+        }
+
+        /* Devices Deep-Dive Card */
+        .devices-glossary dl {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+        .devices-glossary dt {
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: var(--dark-accent);
+        }
+        .devices-glossary dd {
+            margin-left: 1.5rem;
+            font-style: italic;
+        }
+
+        /* Quiz Card */
+        .quiz-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+        .quiz-question {
+            padding: 1rem;
+            border: 1px solid var(--light-accent);
+            border-radius: 12px;
+        }
+        .quiz-question p { margin-bottom: 0.5rem; }
+        .mcq-options {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .fill-blank {
+            display: inline-block;
+            width: 150px;
+            border-bottom: 1px solid var(--text-color);
+            margin: 0 5px;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            color: var(--medium-accent);
+        }
+
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+Devanagari+2&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<main>
+
+    <header class="hero">
+        <h1>The World is too much with us</h1>
+        <p>by William Wordsworth</p>
+        <p class="hook">A passionate sonnet decrying humanity's growing disconnect from the natural world.</p>
+    </header>
+
+    <section class="card">
+        <h2>Title Explanation <button class="toggle-hindi-btn" aria-expanded="false" aria-controls="hindi-title">हिं</button></h2>
+        <div id="hindi-title" class="hindi-explanation">
+            कविता के शीर्षक, "The World is too much with us" का मतलब समझने की कोशिश करते हैं। 🗺️
+            <br><br>
+            <strong>"The World" (यह दुनिया):</strong> यहाँ 'दुनिया' का मतलब सिर्फ धरती या लोग नहीं, बल्कि इंसानों की बनाई हुई भौतिकवादी (materialistic) दुनिया है – पैसे कमाना, खर्च करना, चीज़ें इकट्ठा करना, और भाग-दौड़ भरी ज़िंदगी। 🏃‍♂️💰
+            <br><br>
+            <strong>"is too much with us" (हम पर बहुत ज़्यादा हावी है):</strong> इसका मतलब है कि यह भौतिकवादी दुनिया हमारे जीवन में इतनी घुस गई है, हमारे विचारों पर इतनी हावी हो गई है कि हम कुछ और सोच ही नहीं पाते। यह एक बोझ बन गई है।
+            <br><br>
+            <strong>पूरे शीर्षक का मतलब:</strong> यह सांसारिक और भौतिकवादी दुनिया हम पर इतनी हावी हो गई है कि हमने प्रकृति (Nature) के साथ अपना रिश्ता खो दिया है। हम हमेशा कमाने-खर्च करने में लगे रहते हैं और प्रकृति की सुंदरता को महसूस करने का समय ही नहीं निकाल पाते। 😥
+        </div>
+        <ul>
+            <li><strong>"The World":</strong> This doesn't refer to the planet Earth, but to the world of human society, commerce, and materialism. It represents the fast-paced, industrializing society that prioritizes "Getting and spending."</li>
+            <li><strong>"is too much with us":</strong> This phrase suggests a state of being overwhelmed and consumed. The materialistic world isn't just a part of our lives; it has taken over, dominating our thoughts and spirits to a suffocating degree.</li>
+        </ul>
+        <h3>Interpretive Angles:</h3>
+        <p><strong>Literal Meaning:</strong> We are too preoccupied with worldly affairs—jobs, money, possessions—and this constant activity drains our energy and spirit.</p>
+        <p><strong>Symbolic Meaning:</strong> Our obsession with the material world has caused a profound spiritual decay. We have become spiritually deaf and blind to the divine beauty and power of Nature, effectively severing a connection that is essential for human happiness.</p>
+    </section>
+
+    <section class="card">
+        <h2>About the Poet: William Wordsworth <button class="toggle-hindi-btn" aria-expanded="false" aria-controls="hindi-poet">हिं</button></h2>
+        <div id="hindi-poet" class="hindi-explanation">
+            विलियम वर्ड्सवर्थ (1770-1850) Romantic Era के सबसे बड़े कवियों में से एक थे। 🏞️ वह इंग्लैंड के खूबसूरत Lake District में पले-बढ़े, और इसी वजह से प्रकृति से उनका गहरा लगाव था।
+            <br><br>
+            उनके समय में Industrial Revolution (औद्योगिक क्रांति) चल रही थी। शहर बढ़ रहे थे, फैक्ट्रियाँ लग रही थीं, और लोग प्रकृति से दूर हो रहे थे। वर्ड्सवर्थ को यह देखकर बहुत दुख होता था। 🏭😟
+            <br><br>
+            उनकी कविताओं में प्रकृति एक जीवित शक्ति है, एक शिक्षक है, और ईश्वर का रूप है। वह मानते थे कि प्रकृति के साथ जुड़कर ही इंसान को सच्ची शांति और खुशी मिल सकती है। यह कविता, "The World is too much with us," उनकी इसी चिंता को ज़ाहिर करती है कि इंसान ने अपनी आत्मा को भौतिकवाद के हाथों बेच दिया है।
+        </div>
+        <p><strong>William Wordsworth (1770–1850)</strong> is a foundational figure of English Romanticism. Raised in the scenic Lake District of England, his profound connection to the natural world became the cornerstone of his poetry. He lived during the height of the Industrial Revolution, a period of rapid urbanization and technological change that he believed was alienating humanity from its natural and spiritual roots.</p>
+        <p><strong>Core Preoccupations:</strong> Wordsworth's work consistently explores themes of <strong>Nature</strong> as a divine teacher, the power of <strong>memory</strong> and childhood, and the importance of <strong>emotion</strong> and imagination in understanding the world. He championed the use of common language in poetry to express profound feelings.</p>
+        <p><strong>Why this poem is representative:</strong> This sonnet perfectly encapsulates Wordsworth's central anxieties. It's a powerful critique of the materialism spawned by the Industrial Revolution and a lament for humanity's resulting spiritual numbness and disconnection from nature. It is a classic example of his role as a poet-prophet warning society of its destructive path.</p>
+    </section>
+
+    <section class="card">
+        <h2>Literary Period: Romanticism <button class="toggle-hindi-btn" aria-expanded="false" aria-controls="hindi-period">हिं</button></h2>
+        <div id="hindi-period" class="hindi-explanation">
+            यह कविता Romanticism (या Romantic Era) नामक साहित्यिक आंदोलन का हिस्सा है, जो 18वीं सदी के अंत और 19वीं सदी की शुरुआत में यूरोप में बहुत लोकप्रिय था।
+            <br><br>
+            सोचो यह एक ऐसा समय था जब लोग तर्क (logic) और विज्ञान (science) से ज़्यादा भावनाओं (emotions) और कल्पना (imagination) को महत्व देने लगे। 💖✨
+            <br><br>
+            <strong>Romanticism की मुख्य बातें:</strong>
+            <ul>
+                <li><strong>प्रकृति प्रेम 🌲:</strong> प्रकृति को सबसे बड़ा गुरु और ईश्वर का रूप मानना।</li>
+                <li><strong>भावनाओं पर ज़ोर ❤️‍🩹:</strong> तर्क से ज़्यादा दिल की आवाज़ सुनना।</li>
+                <li><strong>कल्पना की शक्ति 🎨:</strong> दुनिया को एक नई नज़र से देखना।</li>
+                <li><strong>अतीत का आकर्षण 🏰:</strong> पुरानी कहानियों और मिथकों में रुचि।</li>
+            </ul>
+            यह कविता इन सभी बातों को दर्शाती है। यह प्रकृति से दूर होने पर दुख जताती है और भावनाओं के खत्म हो जाने की चिंता करती है। अंत में, कवि पुराने ग्रीक मिथकों को याद करता है, जो Romanticism का एक खास गुण है।
+        </div>
+        <p>This poem is a quintessential work of the <strong>Romantic Movement</strong>, which flourished in Europe from the late 18th to the mid-19th century. Romanticism was a reaction against the scientific rationalism of the Enlightenment and the negative effects of industrialization.</p>
+        <h3>Main Features of Romanticism:</h3>
+        <ul>
+            <li><strong>Primacy of Emotion and Imagination:</strong> Romantics valued subjective feeling and intuition over objective reason.</li>
+            <li><strong>Glorification of Nature:</strong> Nature was seen not just as beautiful, but as a living entity, a source of spiritual truth, moral guidance, and sublime experiences.</li>
+            <li><strong>Focus on the Individual:</strong> The poet's personal experiences, thoughts, and feelings were central.</li>
+            <li><strong>Interest in the Supernatural and Mythical Past:</strong> There was a fascination with folklore, myths, and "creeds outworn" as a way to access deeper truths.</li>
+        </ul>
+        <h3>How this Poem Embodies Romanticism:</h3>
+        <p>The poem is a perfect Romantic artifact. It laments the loss of connection to Nature, criticizes the cold materialism of modern society, expresses intense personal emotion ("Great God!"), and ultimately longs for a more imaginative, myth-infused past (paganism) where humanity and nature were deeply intertwined.</p>
+    </section>
+
+    <section class="card">
+        <h2>Poetic Form & Prosody <button class="toggle-hindi-btn" aria-expanded="false" aria-controls="hindi-form">हिं</button></h2>
+        <div id="hindi-form" class="hindi-explanation">
+            यह कविता एक 'सॉनेट' (Sonnet) है। सॉनेट 14 लाइनों की एक छोटी कविता होती है, जिसका एक खास ढाँचा (structure) होता है। 📝
+            <br><br>
+            <strong>Form (प्रकार):</strong> यह एक <strong>Petrarchan Sonnet</strong> (जिसे Italian Sonnet भी कहते हैं) है। इसमें दो भाग होते हैं:
+            <ul>
+                <li><strong>Octave (पहली 8 लाइनें):</strong> इसमें कवि एक समस्या या सवाल पेश करता है। यहाँ समस्या है - दुनिया में हमारी भौतिकवादी व्यस्तता। 🤔</li>
+                <li><strong>Sestet (आखिरी 6 लाइनें):</strong> इसमें कवि उस समस्या का समाधान या उस पर अपनी प्रतिक्रिया देता है। यहाँ कवि की प्रतिक्रिया है - काश मैं एक पैगन होता! 🙏</li>
+            </ul>
+            <strong>Rhyme Scheme (तुकबंदी):</strong> ABBAABBA CDCDCD.
+            <br>
+            <strong>Meter (लय):</strong> यह <strong>Iambic Pentameter</strong> में लिखी गई है। इसका मतलब है कि हर लाइन में 10 syllables (अक्षर) होते हैं, जो 5 जोड़ों में बँटे होते हैं (एक un-stressed और एक STRESSED syllable)। यह कविता को एक दिल की धड़कन जैसी लय देता है: da-DUM da-DUM da-DUM da-DUM da-DUM. ❤️
+        </div>
+        <ul>
+            <li><strong>Form:</strong> Petrarchan Sonnet (also known as an Italian Sonnet). This form is divided into two distinct parts:
+                <ul>
+                    <li>An <strong>Octave</strong> (the first 8 lines), which presents a problem, argument, or question. Here, it describes humanity's alienation from nature.</li>
+                    <li>A <strong>Sestet</strong> (the final 6 lines), which provides a resolution, comment, or answer to the problem. Here, it offers the speaker's desperate personal solution.</li>
+                </ul>
+            </li>
+            <li><strong>Rhyme Scheme:</strong> The octave follows an <strong>ABBAABBA</strong> scheme. The sestet follows a <strong>CDCDCD</strong> scheme.</li>
+            <li><strong>Meter:</strong> The poem is written in <strong>Iambic Pentameter</strong>. This means each line consists of ten syllables, arranged in five pairs (iambs) of one unstressed syllable followed by one stressed syllable (e.g., "The <strong>World</strong> | is <strong>too</strong> | much <strong>with</strong> | us; <strong>late</strong> | and <strong>soon</strong>"). This creates a rhythmic, heartbeat-like cadence.</li>
+            <li><strong>Structural Feature (The Volta):</strong> The "turn" or <em>volta</em> in thought occurs at the beginning of the sestet (line 9). The poem shifts dramatically from a general complaint about "us" to a passionate, personal declaration from the speaker ("Great God! I'd rather be...").</li>
+        </ul>
+        <details>
+            <summary>Quick Tip: How to Scan Meter</summary>
+            <div>
+                <p><strong>1. Count Syllables:</strong> Count the syllables in a line. Iambic Pentameter almost always has 10.</p>
+                <p><strong>2. Find the Stresses:</strong> Read the line aloud naturally. Note which syllables you emphasize. For example, in "We <strong>have</strong> | giv<strong>en</strong> | our <strong>hearts</strong> | a<strong>way</strong>," the stress naturally falls on the second syllable of each pair.</p>
+                <p><strong>3. Identify the Pattern:</strong> The pattern unstressed/stressed (da-DUM) is an "iamb". Five of these in a row make "iambic pentameter" (penta = five).</p>
+            </div>
+        </details>
+    </section>
+
+    <article>
+        <h2>The Complete Poem & Analysis</h2>
+
+        <div class="poem-section">
+            <div class="original-text-box">
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                    <h3>The Octave: The Problem</h3>
+                    <button class="toggle-hindi-btn" aria-expanded="false" aria-controls="hindi-octave">हिं</button>
+                </div>
+                <pre class="poem-text">The World is too much with us; late and soon,
+Getting and spending, we lay waste our powers:
+Little we see in Nature that is ours;
+We have given our hearts away, a sordid boon!
+The Sea that bares her bosom to the moon;
+The Winds that will be howling at all hours,
+And are up-gathered now like sleeping flowers,
+For this, for everything, we are out of tune;</pre>
+                <div id="hindi-octave" class="hindi-explanation">
+                    <strong>कहानी कुछ यूँ है...</strong>
+                    <br>
+                    कवि शिकायत कर रहे हैं। 😠 वह कहते हैं, "यह दुनिया (मतलब पैसा, सामान, नौकरी) हम पर पूरी तरह हावी हो चुकी है! सुबह हो या शाम, हम बस 'कमाने और खर्च करने' में लगे हैं। इस चक्कर में हम अपनी असली ताकत (यानी महसूस करने की शक्ति) बर्बाद कर रहे हैं।"
+                    <br><br>
+                    "हमें प्रकृति में अब कुछ भी अपना सा नहीं लगता। हमने अपना दिल एक बहुत ही गंदे सौदे में बेच दिया है! 💔 देखो, समुद्र चाँद के लिए अपना सीना खोले है, हवाएँ हर समय गरजती रहती हैं, और कभी-कभी सोए हुए फूलों की तरह शांत हो जाती हैं... पर इन सब खूबसूरत चीज़ों के लिए, हम पूरी तरह 'बेतूके' हो गए हैं। हम इनके संगीत को महसूस ही नहीं कर पाते।" 🎶🔇
+                </div>
+            </div>
+
+            <div class="analysis-box">
+                <h3>Difficult Words</h3>
+                <div class="difficult-words">
+                    <ul>
+                        <li><b>Lay waste:</b> To destroy or ruin completely. (बर्बाद करना)</li>
+                        <li><b>Powers:</b> Our innate abilities to feel, appreciate, and connect with the world emotionally and spiritually. (शक्तियाँ / क्षमताएं)</li>
+                        <li><b>Sordid:</b> Dirty, immoral, or base. (घटिया / घिनौना)</li>
+                        <li><b>Boon:</b> A gift or a benefit. Here, it's used ironically. (वरदान)</li>
+                        <li><b>Bares her bosom:</b> An intimate image suggesting vulnerability and openness. (अपना सीना खोलना)</li>
+                        <li><b>Out of tune:</b> Not in harmony; disconnected. (बेसुरा / तालमेल से बाहर)</li>
+                    </ul>
+                </div>
+
+                <h3>Imagery, Symbols & Sound</h3>
+                <p><strong>Imagery:</strong> The powerful images are drawn from nature: the personified <strong>Sea</strong> revealing itself to the moon, and the <strong>Winds</strong> that are both "howling" (active/wild) and "like sleeping flowers" (passive/gentle). This contrast highlights nature's dynamic life, which humanity ignores.</p>
+                <p><strong>Symbol:</strong> The act of "Getting and spending" symbolizes the entire materialistic, consumerist lifestyle that Wordsworth critiques.</p>
+                <p><strong>Sound:</strong> The long 'o' sounds in "soon," "boon," and "moon" (assonance) create a mournful, echoing tone that reinforces the poet's lament.</p>
+
+                <h3>Stanza Focus (Theme & Tone)</h3>
+                <p><strong>Theme:</strong> The core theme is humanity's spiritual alienation due to materialism. We have traded our emotional and spiritual connection with nature for material gain, which the poet calls a "sordid boon" (a dirty gift).</p>
+                <p><strong>Tone:</strong> The tone is one of frustration, lament, and deep disappointment. The poet is not just sad, but angry at this collective failure.</p>
+            </div>
+        </div>
+
+        <div class="poem-section">
+            <div class="original-text-box">
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                    <h3>The Sestet: The Solution</h3>
+                    <button class="toggle-hindi-btn" aria-expanded="false" aria-controls="hindi-sestet">हिं</button>
+                </div>
+                <pre class="poem-text">It moves us not.—Great God! I’d rather be
+A Pagan suckled in a creed outworn;
+So might I, standing on this pleasant lea,
+Have glimpses that would make me less forlorn;
+Have sight of Proteus rising from the sea;
+Or hear old Triton blow his wreathèd horn.</pre>
+                 <div id="hindi-sestet" class="hindi-explanation">
+                    <strong>और फिर कवि का मन बदलता है...</strong>
+                    <br>
+                    कवि चिल्लाकर कहते हैं, "यह सब हमें ज़रा भी प्रभावित नहीं करता! – हे भगवान! इससे तो अच्छा होता कि मैं एक 'पैगन' होता (पुराने ज़माने का प्रकृति-पूजक), जो एक ऐसे धर्म में पला-बढ़ा हो जिसे आज दुनिया पुराना और बेकार मानती है।"
+                    <br><br>
+                    "अगर मैं एक पैगन होता, तो शायद इस खूबसूरत घास के मैदान (lea) पर खड़े होकर मुझे ऐसी झलकियाँ दिखतीं जो मेरे अकेलेपन को कम कर देतीं। 😌 काश मैं समुद्र से निकलते हुए देवता 'प्रोटियस' को देख पाता, या फिर पुराने देवता 'ट्राइटन' को उनका घुमावदार शंख बजाते हुए सुन पाता।" 🌊🐚
+                    <br><br>
+                    इसका मतलब यह है कि कवि इतने दुखी हैं कि वह किसी भी ऐसे विश्वास को अपनाने को तैयार हैं जो उन्हें प्रकृति से जोड़ सके, भले ही वह विश्वास आज पुराना माना जाता हो।
+                </div>
+            </div>
+
+            <div class="analysis-box">
+                <h3>Difficult Words</h3>
+                <div class="difficult-words">
+                    <ul>
+                        <li><b>Pagan:</b> A person holding religious beliefs other than those of the main world religions, often referring to pre-Christian nature worshippers. (प्रकृति-पूजक)</li>
+                        <li><b>Suckled:</b> To be brought up or nourished. (पाला-पोसा हुआ)</li>
+                        <li><b>Creed outworn:</b> An old, outdated system of beliefs. (पुराना/घिसा-पिटा धर्म)</li>
+                        <li><b>Lea:</b> An open area of grassy land; a meadow. (घास का मैदान)</li>
+                        <li><b>Forlorn:</b> Pitifully sad and abandoned or lonely. (उदास / अकेला)</li>
+                        <li><b>Proteus & Triton:</b> Figures from Greek mythology. Proteus was a sea-god who could change his shape. Triton was a sea-god, son of Poseidon, who used a conch shell as a horn. (ग्रीक पौराणिक कथाओं के समुद्री देवता)</li>
+                    </ul>
+                </div>
+                
+                <h3>Imagery, Symbols & Sound</h3>
+                <p><strong>Imagery:</strong> The sestet shifts to mythological imagery: the visual of <strong>Proteus</strong> rising from the water and the auditory image of <strong>Triton</strong> blowing his horn. These are not images of real nature, but of a nature animated by divine presence, as seen through the eyes of faith.</p>
+                <p><strong>Symbol:</strong> The "Pagan" symbolizes anyone who lives in deep, spiritual harmony with the natural world, in contrast to the modern, disconnected individual.</p>
+                <p><strong>Allusion:</strong> The references to Proteus and Triton are classical allusions, used to evoke a worldview where nature was filled with gods and wonder.</p>
+
+                <h3>Stanza Focus (Theme & Tone)</h3>
+                <p><strong>Theme:</strong> The theme is a desperate longing for spiritual reconnection. The speaker rejects his contemporary world so completely that he wishes for a "primitive" belief system that would allow him to see wonder and divinity in nature again, curing his feeling of being "forlorn."</p>
+                <p><strong>Tone:</strong> The tone shifts dramatically from disappointment to passionate, desperate yearning. The exclamation "Great God!" marks the volta (turn) and injects a powerful surge of personal emotion.</p>
+            </div>
+        </div>
+    </article>
+
+    <section class="card devices-glossary">
+        <h2>Devices Deep-Dive</h2>
+        <dl>
+            <div>
+                <dt>Personification</dt>
+                <dd>Giving human qualities to inanimate objects or abstract ideas.<br><em>Example: "The Sea that bares her bosom to the moon; The Winds that will be howling..."</em> The sea is given a female form and the winds are described as if they are creatures capable of howling.</dd>
+            </div>
+            <div>
+                <dt>Simile</dt>
+                <dd>A comparison between two different things using "like" or "as".<br><em>Example: "...The Winds... are up-gathered now like sleeping flowers."</em> This compares the stillness of the wind to the folded petals of sleeping flowers, creating a gentle and beautiful image.</dd>
+            </div>
+            <div>
+                <dt>Allusion</dt>
+                <dd>An indirect reference to a person, place, event, or literary work.<br><em>Example: "Have sight of Proteus rising from the sea; / Or hear old Triton blow his wreathèd horn."</em> These are allusions to Greek mythology, used to represent a worldview in which nature is magical and divine.</dd>
+            </div>
+            <div>
+                <dt>Paradox / Irony</dt>
+                <dd>A statement that appears self-contradictory but contains a deeper truth.<br><em>Example: "...a sordid boon!"</em> A "boon" is a gift, but "sordid" means dirty. This paradox highlights that the material wealth we have gained is a morally corrupting "gift" for which we've sacrificed our souls.</dd>
+            </div>
+             <div>
+                <dt>Apostrophe</dt>
+                <dd>A direct address to an absent person, an abstract idea, or an inanimate object.<br><em>Example: "Great God!"</em> The poet directly addresses God, marking a moment of intense emotional outburst and signaling the poem's turn (volta).</dd>
+            </div>
+        </dl>
+    </section>
+
+    <section class="card">
+        <h2>Critical Analysis <button class="toggle-hindi-btn" aria-expanded="false" aria-controls="hindi-critical">हिं</button></h2>
+        <div id="hindi-critical" class="hindi-explanation">
+            यह कविता सिर्फ़ प्रकृति के बारे में नहीं है, बल्कि आधुनिक जीवन की एक गहरी आलोचना है। 🧐
+            <br><br>
+            वर्ड्सवर्थ ने इस कविता को एक Petrarchan Sonnet के सख्त नियमों में लिखा है। यह अपने आप में एक संदेश है: जिस तरह सॉनेट का एक सुंदर ढाँचा और लय होती है, उसी तरह जीवन में भी प्रकृति के साथ एक सामंजस्य (harmony) होना चाहिए। लेकिन आधुनिक इंसान इस लय से "out of tune" हो गया है। 🎶➡️🔇
+            <br><br>
+            कविता का सबसे बड़ा मोड़ (volta) 9वीं लाइन में आता है जब कवि "Great God!" चिल्लाते हैं। यहाँ तक वह 'हम' (we) की बात कर रहे थे, लेकिन अब वह 'मैं' (I) पर आ जाते हैं। यह दिखाता है कि समाज की इस समस्या से वह व्यक्तिगत रूप से कितना ज़्यादा दुखी और अकेला (forlorn) महसूस करते हैं।
+            <br><br>
+            एक ईसाई देश में रहते हुए, 'पैगन' बनने की इच्छा करना एक बहुत बड़ी और साहसी बात थी। यह दिखाता है कि वर्ड्सवर्थ को अपने समाज के आध्यात्मिक खोखलेपन से कितनी नफ़रत थी। उनके लिए, एक 'पुराना' विश्वास जो प्रकृति से जोड़ता है, उस 'नए' विश्वास से बेहतर है जो इंसान को भौतिकवाद में डुबो देता है।
+            <br><br>
+            आज भी, जब हम मोबाइल फोन 📱 और सोशल मीडिया की दुनिया में खोए रहते हैं, यह कविता हमें याद दिलाती है कि हमने असली दुनिया—प्रकृति की दुनिया—से अपना नाता तोड़ लिया है। इसलिए यह कविता आज भी उतनी ही प्रासंगिक है।
+        </div>
+        <p>William Wordsworth’s "The World is too much with us" is more than a simple paean to nature; it is a profound and incisive critique of modernity itself, articulated through the compact and powerful form of the Petrarchan sonnet. The poem’s central tension lies in the conflict between two "worlds": the artificial, materialistic world of human commerce ("Getting and spending") and the eternal, spiritual world of Nature. Wordsworth argues that the former has so thoroughly consumed humanity ("is too much with us") that we have become desensitized to the latter, rendering us "out of tune" with the fundamental rhythms of existence.</p>
+        <p>The poet’s craft is masterful in reinforcing this theme. The choice of the sonnet form is itself significant. Its strict structure, rhyme scheme, and meter impose an order and harmony that stands in stark contrast to the spiritual chaos of the modern world being described. The octave meticulously lays out the problem with a tone of weary disappointment. The language is damning: our material gains are a "sordid boon," and we have actively "given our hearts away." The personification of the Sea and Winds endows nature with a vibrant, sentient life that humanity, in its self-absorption, tragically fails to perceive.</p>
+        <p>The poem's philosophical and ethical stakes are revealed in the sestet, which begins with the explosive volta, "Great God!" This emotional outburst shifts the poem's focus from a collective lament ("we") to a fiercely personal and desperate resolution ("I"). The speaker's wish to be "A Pagan suckled in a creed outworn" is a radical and shocking statement for its time. He is not merely expressing a preference for nature; he is rejecting the entire framework of contemporary Christian society, suggesting it has failed to provide the spiritual nourishment that even an "outworn" pre-Christian faith could offer. The allusions to Proteus and Triton are not just decorative; they symbolize a worldview where divinity is immanent in nature, where the sea is not just water but the home of gods. This is the imaginative vision that modern man has lost, leaving him "forlorn."</p>
+        <p>The poem’s enduring power lies in its prescience. Written at the dawn of the Industrial Revolution, it diagnoses a spiritual malaise that has only intensified in the centuries since. In our current age of digital distraction and environmental crisis, Wordsworth’s lament feels more urgent than ever. It serves as a timeless reminder of the cost of sacrificing our connection to the natural world on the altar of material progress. Its place in the classroom is secure because it forces us to confront a fundamental question: in gaining the "World," what essential part of ourselves have we lost?</p>
+    </section>
+
+    <section class="card">
+        <h2>Review Quiz</h2>
+        <p>Test your understanding of the poem. These questions are commonly asked in university exams across India.</p>
+        <div class="quiz-container">
+            <div class="quiz-question">
+                <p><strong>1. "The World is too much with us" is a type of:</strong></p>
+                <ul class="mcq-options">
+                    <li>(a) Ode</li>
+                    <li>(b) Ballad</li>
+                    <li>(c) Petrarchan Sonnet</li>
+                    <li>(d) Shakespearean Sonnet</li>
+                </ul>
+            </div>
+            <div class="quiz-question">
+                <p><strong>2. The rhyme scheme of the octave is:</strong></p>
+                <ul class="mcq-options">
+                    <li>(a) ABAB CDCD</li>
+                    <li>(b) ABBAABBA</li>
+                    <li>(c) AABB CCDD</li>
+                    <li>(d) ABCABCDE</li>
+                </ul>
+            </div>
+            <div class="quiz-question">
+                <p><strong>3. What does the poet mean by "The World" in the first line?</strong></p>
+                <ul class="mcq-options">
+                    <li>(a) Planet Earth</li>
+                    <li>(b) The universe</li>
+                    <li>(c) The life of materialism and commerce</li>
+                    <li>(d) The animal kingdom</li>
+                </ul>
+            </div>
+             <div class="quiz-question">
+                <p><strong>4. The phrase "sordid boon" is an example of:</strong></p>
+                <ul class="mcq-options">
+                    <li>(a) Metaphor</li>
+                    <li>(b) Simile</li>
+                    <li>(c) Oxymoron/Paradox</li>
+                    <li>(d) Personification</li>
+                </ul>
+            </div>
+             <div class="quiz-question">
+                <p><strong>5. The 'volta' or turn in the sonnet occurs at:</strong></p>
+                <ul class="mcq-options">
+                    <li>(a) Line 5</li>
+                    <li>(b) Line 13</li>
+                    <li>(c) Line 9</li>
+                    <li>(d) Line 1</li>
+                </ul>
+            </div>
+            <div class="quiz-question">
+                <p><strong>6. The poet would rather be a "Pagan" because:</strong></p>
+                <ul class="mcq-options">
+                    <li>(a) He hates Christianity</li>
+                    <li>(b) A pagan would feel more connected to nature</li>
+                    <li>(c) He wants to worship many gods</li>
+                    <li>(d) He thinks paganism is modern</li>
+                </ul>
+            </div>
+            <div class="quiz-question">
+                <p><strong>7. Who are Proteus and Triton?</strong></p>
+                <ul class="mcq-options">
+                    <li>(a) Roman emperors</li>
+                    <li>(b) English poets</li>
+                    <li>(c) Greek sea-gods</li>
+                    <li>(d) Biblical prophets</li>
+                </ul>
+            </div>
+            <div class="quiz-question">
+                <p><strong>8. The line "The Sea that bares her bosom to the moon" uses which literary device?</strong></p>
+                <ul class="mcq-options">
+                    <li>(a) Allusion</li>
+                    <li>(b) Simile</li>
+                    <li>(c) Metaphor</li>
+                    <li>(d) Personification</li>
+                </ul>
+            </div>
+            <div class="quiz-question">
+                <p><strong>9. The dominant mood of the octave (first 8 lines) is:</strong></p>
+                <ul class="mcq-options">
+                    <li>(a) Joy and celebration</li>
+                    <li>(b) Fear and horror</li>
+                    <li>(c) Disappointment and frustration</li>
+                    <li>(d) Hope and optimism</li>
+                </ul>
+            </div>
+             <div class="quiz-question">
+                <p><strong>10. The poem was written during which literary period?</strong></p>
+                <ul class="mcq-options">
+                    <li>(a) The Neoclassical Age</li>
+                    <li>(b) The Victorian Era</li>
+                    <li>(c) The Romantic Period</li>
+                    <li>(d) The Modernist Period</li>
+                </ul>
+            </div>
+             <div class="quiz-question">
+                <p><strong>11. According to the poet, what do we "lay waste"?</strong></p>
+                <ul class="mcq-options">
+                    <li>(a) Our money</li>
+                    <li>(b) Our time</li>
+                    <li>(c) Our powers</li>
+                    <li>(d) Our natural resources</li>
+                </ul>
+            </div>
+             <div class="quiz-question">
+                <p><strong>12. The sight of Proteus and Triton would make the speaker less:</strong></p>
+                <ul class="mcq-options">
+                    <li>(a) Rich</li>
+                    <li>(b) Forlorn</li>
+                    <li>(c) Religious</li>
+                    <li>(d) Powerful</li>
+                </ul>
+            </div>
+            <div class="quiz-question">
+                <p><strong>13. The poem critiques the effects of:</strong></p>
+                <ul class="mcq-options">
+                    <li>(a) The French Revolution</li>
+                    <li>(b) The Renaissance</li>
+                    <li>(c) The Industrial Revolution</li>
+                    <li>(d) The World Wars</li>
+                </ul>
+            </div>
+
+            <div class="quiz-question">
+                <p><strong>14. The meter of the poem is Iambic <span class="fill-blank"></span>.</strong></p>
+            </div>
+            <div class="quiz-question">
+                <p><strong>15. In the second line, the poet says we are busy in "Getting and <span class="fill-blank"></span>."</strong></p>
+            </div>
+            <div class="quiz-question">
+                <p><strong>16. The poet says, "Little we see in <span class="fill-blank"></span> that is ours."</strong></p>
+            </div>
+            <div class="quiz-question">
+                <p><strong>17. The Winds are compared to sleeping <span class="fill-blank"></span>.</strong></p>
+            </div>
+            <div class="quiz-question">
+                <p><strong>18. A "creed outworn" refers to the beliefs of a <span class="fill-blank"></span>.</strong></p>
+            </div>
+             <div class="quiz-question">
+                <p><strong>19. The speaker wants to see Proteus rising from the <span class="fill-blank"></span>.</strong></p>
+            </div>
+             <div class="quiz-question">
+                <p><strong>20. The poem consists of <span class="fill-blank"></span> lines in total.</strong></p>
+            </div>
+             <div class="quiz-question">
+                <p><strong>21. For everything in nature, the poet says "we are out of <span class="fill-blank"></span>."</strong></p>
+            </div>
+             <div class="quiz-question">
+                <p><strong>22. The sonnet is divided into an octave and a <span class="fill-blank"></span>.</strong></p>
+            </div>
+             <div class="quiz-question">
+                <p><strong>23. Triton is known for blowing his wreathed <span class="fill-blank"></span>.</strong></p>
+            </div>
+            <div class="quiz-question">
+                <p><strong>24. The poet directly addresses God in the line that starts with "<span class="fill-blank"></span>!"</strong></p>
+            </div>
+             <div class="quiz-question">
+                <p><strong>25. Wordsworth was a key poet of the <span class="fill-blank"></span> movement.</strong></p>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<footer>
+    <p>&copy; 2025 NAVAGRA ENTERPRISES. All rights reserved.</p>
+    <p>DESIGNED AND WRITTEN BY Vishnu Sharma</p>
+</footer>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const toggleButtons = document.querySelectorAll('.toggle-hindi-btn');
+
+        toggleButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const isExpanded = button.getAttribute('aria-expanded') === 'true';
+                const contentId = button.getAttribute('aria-controls');
+                const content = document.getElementById(contentId);
+
+                if (content) {
+                    button.setAttribute('aria-expanded', !isExpanded);
+                    content.style.display = isExpanded ? 'none' : 'block';
+                }
+            });
+        });
+    });
+</script>
+
+</body>
+</html>
