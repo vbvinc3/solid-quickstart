@@ -1,0 +1,51 @@
+<!-- metadata: title: Getting Started with SolidJS, date: 2024-01-15, author: Admin -->
+
+<h1>Getting Started with SolidJS</h1>
+
+<p>SolidJS is a declarative JavaScript library for building user interfaces. Unlike other frameworks that use a Virtual DOM, Solid compiles its templates down to real DOM nodes and wraps updates in fine-grained reactions. This approach leads to exceptional performance and a smaller bundle size.</p>
+
+<h2>Why Choose SolidJS?</h2>
+
+<p>There are several compelling reasons to choose SolidJS for your next project:</p>
+
+<ul>
+  <li><strong>Performance:</strong> Solid's fine-grained reactivity system ensures that only the necessary parts of your UI update when data changes.</li>
+  <li><strong>Small Bundle Size:</strong> With no Virtual DOM overhead, Solid applications are significantly smaller than equivalent React applications.</li>
+  <li><strong>Familiar Syntax:</strong> If you know React, you'll feel right at home with Solid's JSX syntax.</li>
+  <li><strong>No Runtime:</strong> Solid compiles away at build time, leaving you with optimized vanilla JavaScript.</li>
+</ul>
+
+<h2>Key Features</h2>
+
+<p>SolidJS comes packed with features that make development enjoyable:</p>
+
+<ol>
+  <li>Reactive primitives like <code>createSignal</code>, <code>createEffect</code>, and <code>createMemo</code></li>
+  <li>Built-in control flow components like <code>Show</code>, <code>For</code>, and <code>Switch</code></li>
+  <li>Powerful stores for managing complex state</li>
+  <li>Server-side rendering support out of the box</li>
+  <li>Excellent TypeScript support</li>
+</ol>
+
+<h2>A Simple Example</h2>
+
+<pre><code>import { createSignal } from 'solid-js';
+
+function Counter() {
+  const [count, setCount] = createSignal(0);
+  
+  return (
+    &lt;div&gt;
+      &lt;p&gt;Count: {count()}&lt;/p&gt;
+      &lt;button onClick={() =&gt; setCount(count() + 1)}&gt;
+        Increment
+      &lt;/button&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+
+<h2>Conclusion</h2>
+
+<p>SolidJS represents a new generation of JavaScript frameworks that prioritize performance and developer experience. Whether you're building a simple website or a complex web application, Solid provides the tools you need to succeed.</p>
+
+<p>Ready to dive deeper? Check out the official SolidJS documentation and start building amazing applications today!</p>
