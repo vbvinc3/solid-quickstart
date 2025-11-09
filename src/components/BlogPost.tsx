@@ -1,6 +1,5 @@
-import { Component, Show } from 'solid-js';
+import { Component, Show, onMount } from 'solid-js';
 import { A } from '@solidjs/router';
-import DOMPurify from 'dompurify';
 import type { Post } from '../utils/postLoader';
 import { formatDate } from '../utils/postLoader';
 
@@ -9,25 +8,33 @@ interface BlogPostProps {
 }
 
 const BlogPost: Component<BlogPostProps> = (props) => {
-  const sanitizedContent = () => {
-    return DOMPurify.sanitize(props.post.content, {
-      ALLOWED_TAGS: [
-        'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
-        'p', 'br', 'hr',
-        'strong', 'em', 'u', 'strike', 'b', 'i',
-        'ul', 'ol', 'li',
-        'a', 'img',
-        'blockquote', 'pre', 'code',
-        'table', 'thead', 'tbody', 'tr', 'th', 'td',
-        'div', 'span', 'article', 'section',
-        'figure', 'figcaption'
-      ],
-      ALLOWED_ATTR: [
-        'href', 'src', 'alt', 'title', 'class', 'id',
-        'width', 'height', 'style', 'target', 'rel'
-      ]
-    });
+  let iframeRef: HTMLIFrameElement | undefined;
+
+  const adjustIframeHeight = () => {
+    if (!iframeRef || !iframeRef.contentWindow) return;
+    
+    try {
+      const iframeDocument = iframeRef.contentWindow.document;
+      const height = iframeDocument.documentElement.scrollHeight;
+      iframeRef.style.height = height + 'px';
+    } catch (error) {
+      console.error('Error adjusting iframe height:', error);
+    }
   };
+
+  onMount(() => {
+    if (iframeRef) {
+      iframeRef.addEventListener('load', adjustIframeHeight);
+      
+      const resizeObserver = new ResizeObserver(() => {
+        adjustIframeHeight();
+      });
+      
+      if (iframeRef.contentWindow?.document.body) {
+        resizeObserver.observe(iframeRef.contentWindow.document.body);
+      }
+    }
+  });
 
   return (
     <article class="bg-white">
@@ -57,9 +64,13 @@ const BlogPost: Component<BlogPostProps> = (props) => {
         </div>
       </div>
 
-      <div 
-        class="prose prose-lg max-w-none prose-headings:text-gray-900 prose-p:text-gray-700 prose-a:text-gray-900 prose-a:underline prose-strong:text-gray-900 prose-code:text-gray-800 prose-code:bg-gray-100 prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-pre:bg-gray-900 prose-pre:text-gray-100"
-        innerHTML={sanitizedContent()}
+      <iframe
+        ref={iframeRef}
+        src={`/posts/${props.post.slug}.html`}
+        title={props.post.title}
+        class="w-full border-0 min-h-[500px]"
+        sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+        style="display: block;"
       />
     </article>
   );
