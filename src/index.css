@@ -1,7 +1,27 @@
 @import 'tailwindcss';
 
 @layer base {
-    body {
-        @apply font-sans bg-slate-50;
-    }
+  body {
+    @apply font-sans bg-gray-50 text-gray-900;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer utilities {
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
 }
